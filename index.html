@@ -1,0 +1,1115 @@
+<title>Alrawashdeh Engineering Portfolio</title>
+<meta name="description" content="Mechanical design, CAD, FEA and flow simulation by Mohammad Alrawashdeh: cranes, lifts, pumps, robots and a bird-shaped drone.">
+<meta property="og:title" content="Alrawashdeh Engineering Portfolio">
+<meta property="og:description" content="Mechanical design, CAD, FEA and flow simulation: cranes, lifts, pumps, robots and a bird-shaped drone.">
+<meta property="og:image" content="https://mo7amed3lirw.github.io/img/mu-frame2.jpg">
+<meta property="og:type" content="website">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a drawing set. Each project is a sheet with a title block, a revision strip and numbered figures. */
+:root{
+  --paper:#e9ecee;      /* drafting-film grey */
+  --sheet:#f6f7f8;      /* sheet fill */
+  --ink:#12171c;        /* line work */
+  --ink-2:#4a555f;      /* secondary text */
+  --line:#b6bfc6;       /* hairlines */
+  --accent:#f2b705;     /* crane safety yellow, used as a fill only */
+  --accent-ink:#12171c;
+  --frame:#ffffff;      /* image mat, white in both themes so renders keep their background */
+  --font-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1317; --sheet:#171d23; --ink:#e9edf0; --ink-2:#9aa6b1; --line:#2d363e;
+    --accent:#f2b705; --accent-ink:#12171c; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1317; --sheet:#171d23; --ink:#e9edf0; --ink-2:#9aa6b1; --line:#2d363e;
+  --accent:#f2b705; --accent-ink:#12171c; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); font-size:16px; line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:0 56px;
+}
+img,video{max-width:100%; height:auto; display:block}
+a{color:inherit}
+.wrap{max-width:1160px; margin-inline:auto}
+
+/* top bar */
+.bar{display:flex; flex-wrap:wrap; gap:12px 28px; align-items:center; justify-content:space-between; padding-block:18px; border-bottom:2px solid var(--ink)}
+.bar-name{font-family:var(--font-display); font-weight:800; font-size:22px; letter-spacing:.06em; text-transform:uppercase}
+.bar-nav{display:flex; flex-wrap:wrap; gap:6px 22px; font-family:var(--font-mono); font-size:13px}
+.bar-nav a{text-decoration:none; border-bottom:1px solid transparent; padding-block:2px}
+.bar-nav a:hover,.bar-nav a:focus-visible{border-bottom-color:var(--ink); outline:none}
+
+/* hero */
+.hero{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:40px; padding-block:56px 40px; align-items:end}
+.hero-kicker{font-family:var(--font-mono); font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); margin:0 0 14px}
+.hero > *{min-width:0}
+.hero h1{font-family:var(--font-display); font-weight:800; font-size:clamp(40px,6.4vw,84px); line-height:.92; margin:0 0 22px; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word}
+.hero-lead{font-size:19px; max-width:34em; margin:0; color:var(--ink)}
+.tb{border:2px solid var(--ink); background:var(--sheet); width:100%; border-collapse:collapse; font-size:14px}
+.tb th,.tb td{border:1px solid var(--ink); padding:9px 12px; text-align:left; vertical-align:top}
+.tb th{font-family:var(--font-mono); font-weight:500; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); width:34%; background:var(--paper)}
+.tb-flag{background:var(--accent); color:var(--accent-ink); font-weight:600}
+
+/* services */
+.svc{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:0; border-top:2px solid var(--ink); border-bottom:1px solid var(--line)}
+.svc-item{padding:22px 24px 26px 0; border-right:1px solid var(--line)}
+.svc-item:last-child{border-right:0}
+.svc-item h3{font-family:var(--font-display); font-weight:700; font-size:26px; letter-spacing:.02em; margin:0 0 8px; text-transform:uppercase}
+.svc-item p{margin:0; color:var(--ink-2); font-size:15px}
+.svc-item + .svc-item{padding-left:24px}
+
+/* sheets */
+.sheet{margin-top:72px; scroll-margin-top:16px}
+.sheet-head{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline; border-top:2px solid var(--ink); padding-top:16px}
+.sheet-no{font-family:var(--font-mono); font-size:13px; font-weight:500; background:var(--ink); color:var(--paper); padding:3px 9px}
+.sheet-head h2{font-family:var(--font-display); font-weight:800; font-size:clamp(36px,5.5vw,60px); line-height:1; margin:0; text-transform:uppercase; text-wrap:balance}
+.sheet-brief{max-width:46em; font-size:18px; margin:14px 0 22px}
+.chip{display:inline-block; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; border:1px solid var(--ink)}
+.chip-fill{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+
+.cols{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:28px; margin-top:28px; align-items:start}
+.grid{display:grid; gap:18px; margin-top:18px}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.fig{margin:0; border:1px solid var(--line); background:var(--sheet); min-width:0}
+.fig-mat{background:var(--frame); display:flex; align-items:center; justify-content:center}
+.fig img{width:100%; cursor:zoom-in}
+.fig video{width:100%; background:#000}
+.fig figcaption{font-family:var(--font-mono); font-size:12px; line-height:1.45; padding:8px 10px; color:var(--ink-2); border-top:1px solid var(--line)}
+.fig figcaption b{color:var(--ink); font-weight:500; margin-right:6px}
+.fig-tall img{max-height:520px; width:auto; margin-inline:auto}
+
+.sub{font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); margin:40px 0 0; display:flex; gap:12px; align-items:center}
+.sub::after{content:""; flex:1; height:1px; background:var(--line)}
+
+.kv{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr)); border:1px solid var(--ink); background:var(--sheet); margin-top:18px}
+.kv div{padding:14px 16px; border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+.kv strong{display:block; font-family:var(--font-display); font-weight:800; font-size:clamp(26px,3.2vw,36px); line-height:1.05; letter-spacing:.01em; font-variant-numeric:tabular-nums; overflow-wrap:anywhere}
+.kv span{display:block; font-size:13px; color:var(--ink-2); margin-top:6px; line-height:1.35}
+
+.note{border:1px solid var(--ink); background:var(--sheet); padding:18px 20px}
+.note h3{font-family:var(--font-display); font-weight:700; font-size:24px; text-transform:uppercase; margin:0 0 10px; letter-spacing:.02em}
+.note p{margin:0 0 10px; font-size:15px}
+.note p:last-child{margin-bottom:0}
+.note ul{margin:0; padding-left:1.1em; font-size:15px}
+.note li{margin-bottom:6px}
+.small{font-size:13px; color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums}
+
+.rev{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:18px; margin-top:18px}
+.rev .fig figcaption{display:flex; gap:8px; align-items:baseline}
+.rev-tag{font-family:var(--font-mono); font-size:11px; font-weight:500; background:var(--accent); color:var(--accent-ink); padding:1px 6px; flex:none}
+
+.tbl{width:100%; border-collapse:collapse; font-size:14px; background:var(--sheet); border:1px solid var(--ink)}
+.tbl th,.tbl td{padding:8px 12px; border-bottom:1px solid var(--line); text-align:left}
+.tbl th{font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); font-weight:500}
+.tbl td:last-child,.tbl th:last-child{text-align:right; font-variant-numeric:tabular-nums}
+.tbl-wrap{overflow-x:auto}
+
+
+/* tabs */
+.tablist{display:flex; gap:0; margin-top:28px; border-bottom:2px solid var(--ink); overflow-x:auto; scrollbar-width:thin}
+.tablist button{font-family:var(--font-mono); font-size:13px; letter-spacing:.04em; padding:12px 18px; background:transparent; color:var(--ink); border:1px solid var(--line); border-bottom:0; border-right:0; cursor:pointer; white-space:nowrap; flex:none}
+.tablist button:last-child{border-right:1px solid var(--line)}
+.tablist button[aria-selected="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--ink); font-weight:500}
+.tablist button:hover{background:var(--sheet)}
+.tablist button[aria-selected="true"]:hover{background:var(--accent)}
+.tabpanels{padding-top:8px}
+.tabpanel[hidden]{display:none}
+.panel-head{display:flex; flex-wrap:wrap; gap:10px 16px; align-items:baseline; margin-top:26px}
+.panel-head h3{font-family:var(--font-display); font-weight:800; font-size:clamp(28px,4vw,40px); line-height:1.05; margin:0; text-transform:uppercase}
+.cmp td:last-child,.cmp th:last-child{text-align:left}
+.tabpanel .tbl td:last-child{white-space:nowrap}
+.tabpanel .tbl td,.tabpanel .tbl th{text-transform:uppercase}
+
+.tabpanel .tbl.pw td,.tabpanel .tbl.pw th{text-transform:none}
+/* closing */
+.close{margin-top:80px; border-top:2px solid var(--ink); padding-top:26px; display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:28px}
+.close h2{font-family:var(--font-display); font-weight:800; font-size:clamp(34px,5vw,56px); line-height:1; margin:0; text-transform:uppercase; text-wrap:balance}
+.close p{margin:0 0 12px}
+.reach{list-style:none; padding:0; margin:20px 0 0; border:2px solid var(--ink); background:var(--sheet)}
+.reach li{border-bottom:1px solid var(--ink)}
+.reach li:last-child{border-bottom:0}
+.reach a{display:flex; justify-content:space-between; gap:16px; padding:12px 16px; color:var(--ink); text-decoration:none; font-size:15px; overflow-wrap:anywhere}
+.reach a span:first-child{font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); flex:none}
+.reach a span:last-child{text-align:right; font-weight:500}
+.reach a:hover,.reach a:focus-visible{background:var(--accent); outline:none}
+.creds{list-style:none; padding:0; margin:0; font-size:15px}
+.creds li{padding:8px 0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:16px}
+.creds li span:last-child{color:var(--ink-2); text-align:right}
+
+/* lightbox */
+.lb{position:fixed; inset:0; background:rgba(8,10,12,.92); z-index:50; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:20px; cursor:zoom-out}
+.lb[hidden]{display:none}
+.lb img{max-width:100%; max-height:84vh; width:auto; background:#fff}
+.lb p{margin:0; color:#d8dee3; font-family:var(--font-mono); font-size:13px; text-align:center}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:minmax(0,1fr); gap:28px; padding-block:36px 28px}
+  .cols,.close{grid-template-columns:minmax(0,1fr)}
+  .svc-item,.svc-item + .svc-item{padding:20px 0; border-right:0; border-bottom:1px solid var(--line)}
+  .svc-item:last-child{border-bottom:0}
+}
+.exp{margin-top:56px}
+.exp h2{font-family:var(--font-display); font-weight:800; font-size:clamp(30px,4vw,44px); text-transform:uppercase; letter-spacing:.01em; margin:0 0 6px}
+.exp-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); border:2px solid var(--ink); background:var(--sheet); margin-top:16px}
+.exp-item{padding:20px 22px 22px; border-right:1px solid var(--ink)}
+.exp-item:last-child{border-right:0}
+.exp-item h3{font-family:var(--font-display); font-weight:700; font-size:26px; text-transform:uppercase; letter-spacing:.02em; margin:8px 0 4px}
+.exp-item .when{font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); margin:0 0 12px}
+.exp-item ul{margin:0; padding-left:1.1em; font-size:15px}
+.exp-item li{margin-bottom:6px}
+@media (max-width:760px){.exp-item{border-right:0; border-bottom:1px solid var(--ink)} .exp-item:last-child{border-bottom:0}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <span class="bar-name">M. Alrawashdeh</span>
+    <nav class="bar-nav" aria-label="Sheets">
+      <a href="#experience">Experience</a>
+      <a href="#a1">A1 Tower crane</a>
+      <a href="#a2">A2 AirCar</a>
+      <a href="#a3">A3 Can crusher</a>
+      <a href="#a4">A4 Wall jib crane</a>
+      <a href="#a5">A5 Furniture lifts</a>
+      <a href="#a6">A6 Solar displays</a>
+      <a href="#a7">A7 Pumps</a>
+      <a href="#a8">A8 Mushroom machine</a>
+      <a href="#a9">A9 Bird drone</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="hero-kicker">Mechanical design · Simulation · Documentation</p>
+      <h1>Mohammad Alrawashdeh</h1>
+      <p class="hero-lead">Mechanical engineer working in SolidWorks. I model machines from a parametric skeleton, check them with hand calculations and simulation, and issue drawings a workshop can build from.</p>
+    </div>
+    <table class="tb" aria-label="Profile summary">
+      <tr><th>Certified</th><td>SolidWorks CSWP and CSWA (Dassault Systèmes)</td></tr>
+      <tr><th>Degree</th><td>B.Sc. Mechanical Engineering, JUST, Jordan</td></tr>
+      <tr><th>Projects</th><td>35+ design projects, strongest shown below</td></tr>
+      <tr><th>Industry</th><td>Trainee Design Engineer, JoVision, Oct 2023 to Mar 2024</td></tr>
+      <tr><th>Teaching</th><td>200+ students, 700+ hours of engineering tutoring</td></tr>
+      <tr><th>Status</th><td class="tb-flag">Open for new work</td></tr>
+    </table>
+  </section>
+
+  <section class="svc" aria-label="Services">
+    <div class="svc-item">
+      <h3>3D models and drawings</h3>
+      <p>Parts, assemblies and weldments in SolidWorks. Skeleton-driven layouts, mates checked for interference, bills of materials and dimensioned drawing sets.</p>
+    </div>
+    <div class="svc-item">
+      <h3>Design checks</h3>
+      <p>Lever and linkage statics, truss and beam FEA checked against hand calculations, factor of safety, preliminary CFD. Every result is written up with its assumptions.</p>
+    </div>
+    <div class="svc-item">
+      <h3>Engineering tutoring</h3>
+      <p>Thermodynamics, heat transfer, fluid mechanics, machine design and microcontrollers. In person and online.</p>
+    </div>
+  </section>
+
+  <section class="exp" id="experience" aria-label="Experience">
+    <h2>Experience</h2>
+    <p class="sheet-brief">35+ different design projects so far, most with several model variants. The sheets below are the strongest of them. Behind them sit three kinds of work: commissioned design for industry, a design traineeship, and teaching.</p>
+    <div class="exp-grid">
+      <div class="exp-item">
+        <span class="chip chip-fill">Industrial work</span>
+        <h3>Commissioned design</h3>
+        <p class="when">Construction-equipment company, name withheld</p>
+        <ul>
+          <li>Tower crane scale model, designed and modelled in full from a skeleton (<a href="#a1">A1</a>).</li>
+          <li>Five mechanisms for a mobile furniture lift to 15 m, from the same brief (<a href="#a5">A5</a>).</li>
+          <li>Delivered as SolidWorks models with calculations and drawings.</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <span class="chip chip-fill">Traineeship</span>
+        <h3>JoVision</h3>
+        <p class="when">Trainee Design Engineer, Oct 2023 to Mar 2024</p>
+        <ul>
+          <li>Brought computer vision and SolidWorks simulation into industrial workflows.</li>
+          <li>Graduation project with JoVision: an automated tire inspection machine, in a hybrid FEA and CNN pipeline with 93.2% CNN accuracy.</li>
+          <li>Led the four-person team and drew about 90% of the SolidWorks design.</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <span class="chip chip-fill">Teaching</span>
+        <h3>Engineering tutor</h3>
+        <p class="when">Freelance, May 2022 to Aug 2025</p>
+        <ul>
+          <li>200+ university students and 700+ hours, in person and online.</li>
+          <li>Thermodynamics, heat transfer, fluid mechanics, machine design and microcontrollers.</li>
+          <li>Students from JUST, Yarmouk and the University of Jordan.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= A1 TOWER CRANE ========================= -->
+  <section class="sheet" id="a1">
+    <div class="sheet-head">
+      <span class="sheet-no">A1</span>
+      <h2>Tower crane model</h2>
+      <span class="chip chip-fill">Rev C issued</span>
+    </div>
+    <p class="sheet-brief">Commissioned scale model for a construction-equipment company (client name withheld).</p>
+
+    <div class="cols">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-iterC-iso.jpg" alt="Isometric view of the tower crane model, Rev C, with four yellow ballast pads around the mast foot"></div>
+        <figcaption><b>Rev C. </b>Isometric. Lattice mast, trussed jib, pendant ties, four ballast pads.</figcaption>
+      </figure>
+      <div class="note">
+        <h3>What was designed</h3>
+        <p>A lattice-mast tower crane with a trussed jib, a counter-jib carrying stacked counterweight plates, pendant ties from the apex, a hoist rope to the hook block and ballast pads around the mast foot.</p>
+        <p>The model went through three revisions. The last one carries a full dimensioned drawing set with a 29-item assembly sheet.</p>
+        <table class="tb" style="margin-top:14px">
+          <tr><th>Role</th><td>Design and drawings</td></tr>
+          <tr><th>Tools</th><td>SolidWorks</td></tr>
+          <tr><th>Delivered</th><td>Assembly, drawings, renders</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <p class="sub">Revisions</p>
+    <div class="rev">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-iterB-iso.jpg" alt="Crane Rev A with thin lattice members and two ballast blocks" loading="lazy"></div>
+        <figcaption><span class="rev-tag">Rev A</span>Thin-section lattice, two ballast blocks</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-iterA-iso.jpg" alt="Crane Rev B with winch drum, sheaves and a ring-shaped ballast" loading="lazy"></div>
+        <figcaption><span class="rev-tag">Rev B</span>Winch drum and sheaves modelled, ring ballast</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-iterC-side.jpg" alt="Crane Rev C side view" loading="lazy"></div>
+        <figcaption><span class="rev-tag">Rev C</span>Four-pad ballast, drawing set issued</figcaption>
+      </figure>
+    </div>
+
+    <p class="sub">Drawing set</p>
+    <div class="grid grid-2">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-dwg-1.jpg" alt="Crane drawing sheet with top, front and side views and dimensions" loading="lazy"></div>
+        <figcaption><b>Sheet 1. </b>Top, front and side views with dimensions</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-dwg-2.jpg" alt="Crane assembly sheet with 29 numbered balloons" loading="lazy"></div>
+        <figcaption><b>Sheet 2. </b>Assembly view, 29 items called out</figcaption>
+      </figure>
+    </div>
+
+    <p class="sub">Site photos</p>
+    <div class="grid grid-2">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-site-1.jpg" alt="Photo of the crane on a construction site with workers and an excavator" loading="lazy"></div>
+        <figcaption><b>Photo 1. </b>Rev C on site. Photo enhanced with AI.</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/crane-site-2.jpg" alt="Second site photo showing the jib and hook block" loading="lazy"></div>
+        <figcaption><b>Photo 2. </b>Jib and hook block. Photo enhanced with AI.</figcaption>
+      </figure>
+    </div>
+
+    <div class="note" style="margin-top:24px">
+      <h3>Balance screening <span class="chip" style="vertical-align:middle; margin-left:8px">Preliminary estimate</span></h3>
+      <p>Read from the drawing geometry, with no rated load assigned. Hook reach is about 800 drawing units and the counterweight arm about 200, a ratio of 4 to 1.</p>
+      <ul>
+        <li>To balance a hook load Q at full reach, the counterweight must weigh about 4 × Q, plus whatever the jib's own weight adds.</li>
+        <li>The four ballast pads at the mast foot carry the remaining overturning moment to the ground.</li>
+        <li>The ratio does not depend on the drawing scale, so it holds for a scale model and for a full-size version.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========================= A2 AIRCAR ========================= -->
+  <section class="sheet" id="a2">
+    <div class="sheet-head">
+      <span class="sheet-no">A2</span>
+      <h2>AirCar, compressed-air two-seater</h2>
+      <span class="chip chip-fill">R06 drawing issued</span>
+    </div>
+    <p class="sheet-brief">A full vehicle design study: packaging skeleton, tubular space-frame chassis, suspension, steering, chain-driven air-motor powertrain and body, documented in 15 progress reports over three weeks.</p>
+
+    <div class="kv">
+      <div><strong class="num">1.95 m</strong><span>wheelbase, set by the skeleton model</span></div>
+      <div><strong class="num">Ø610</strong><span>wheel diameter in mm, per the R06 drawing</span></div>
+      <div><strong class="num">1,389</strong><span>overall height in mm</span></div>
+      <div><strong class="num">32T / 13T</strong><span>08B chain drive, ratio 2.46</span></div>
+      <div><strong class="num">R00 to R06</strong><span>seven skeleton revisions</span></div>
+    </div>
+
+    <div class="cols">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-dwg-1.jpg" alt="AirCar R06 drawing with top, front and side views and three detail views" loading="lazy"></div>
+        <figcaption><b>R06. </b>Drawing sheet: three views, details A to C. Track 1,193 mm and 1,360 mm.</figcaption>
+      </figure>
+      <div class="note">
+        <h3>Scope</h3>
+        <ul>
+          <li>Parametric skeleton driven by global variables: wheelbase, wheel radius, seat angle, tank bay, tube size.</li>
+          <li>Tubular chassis from CHS 25 × 2 and 30 × 2 mm profiles, four revisions (R01 to R04).</li>
+          <li>Double-wishbone front suspension, trailing-arm rear suspension, rack-and-pinion steering.</li>
+          <li>Pneumatic circuit modelled: tank, filter, regulator, gauge and toggle-switch panel.</li>
+          <li>Road-load, chassis and vehicle calculation workbooks.</li>
+        </ul>
+        <p class="small" style="margin-top:12px">Role: vehicle design, CAD, calculations, CFD. Tools: SolidWorks, SolidWorks Flow Simulation, Excel. Off-the-shelf parts such as the lights, pressure gauge and switches use catalogue geometry.</p>
+      </div>
+    </div>
+
+    <p class="sub">Full vehicle</p>
+    <div class="grid grid-2">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-r1.jpg" alt="Rear three-quarter render of the AirCar with two air tanks in the rear bay and red coil-over shock absorbers" loading="lazy"></div>
+        <figcaption><b>Rear. </b>Twin air tanks in the rear bay, trailing-arm rear suspension with red coil-over dampers</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-r2.jpg" alt="Front three-quarter render of the AirCar showing the faceted body panels, roof and double-wishbone front suspension" loading="lazy"></div>
+        <figcaption><b>Front. </b>Faceted body panels, roof and double-wishbone front suspension with coil-over dampers</figcaption>
+      </figure>
+    </div>
+
+    <p class="sub">Chassis</p>
+    <div class="grid grid-2">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-chassis-side.jpg" alt="Side view of the tubular space-frame chassis" loading="lazy"></div>
+        <figcaption><b>Side. </b>Space frame with triangulated side bays</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-chassis-iso.jpg" alt="Isometric view of the chassis with the seat envelope" loading="lazy"></div>
+        <figcaption><b>Iso. </b>Two-seat cell, seat envelope in yellow</figcaption>
+      </figure>
+      <figure class="fig">
+        <video src="vid/car-motion.mp4" muted loop autoplay playsinline controls preload="metadata" aria-label="Assembly motion study"></video>
+        <figcaption><b>Motion. </b>Assembly motion study</figcaption>
+      </figure>
+    </div>
+
+    <p class="sub">External aerodynamics</p>
+    <div class="kv">
+      <div><strong class="num">307 N</strong><span>drag force at 26.6 m/s (about 96 km/h)</span></div>
+      <div><strong class="num">0.72 m²</strong><span>drag area CdA, from force over dynamic pressure of 427 Pa</span></div>
+      <div><strong class="num">8.2 kW</strong><span>aerodynamic power at that speed</span></div>
+      <div><strong class="num">100.7 to 101.9 kPa</strong><span>surface pressure range, peak at the nose</span></div>
+    </div>
+    <div class="grid grid-2">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-cfd-vel.png" alt="Velocity cut plot showing the wake behind the vehicle" loading="lazy"></div>
+        <figcaption><b>Velocity. </b>Cut plot, 0 to 33 m/s. Low-speed wake behind the cabin.</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-cfd-p-side.png" alt="Surface pressure on the body, side view" loading="lazy"></div>
+        <figcaption><b>Pressure. </b>Side view, stagnation at the nose</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-cfd-p-front.png" alt="Surface pressure on the body, front view" loading="lazy"></div>
+        <figcaption><b>Pressure. </b>Front view</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/car-cfd-traj.png" alt="Flow trajectories around the vehicle coloured by velocity" loading="lazy"></div>
+        <figcaption><b>Flow. </b>Trajectories coloured by velocity</figcaption>
+      </figure>
+      <figure class="fig">
+        <video src="vid/car-cfd-flow.mp4" muted loop playsinline controls preload="metadata" aria-label="Airflow animation"></video>
+        <figcaption><b>Animation. </b>Airflow around the body</figcaption>
+      </figure>
+    </div>
+    <p class="small" style="margin-top:12px">Preliminary screening run in SolidWorks Flow Simulation: external flow, about 16,000 cells, 80 iterations, all goals converged. Useful for comparing body shapes and locating the wake; a finer mesh is the next step for absolute drag.</p>
+  </section>
+
+  <!-- ========================= A3 CAN CRUSHER ========================= -->
+  <section class="sheet" id="a3">
+    <div class="sheet-head">
+      <span class="sheet-no">A3</span>
+      <h2>Compound-lever can crusher</h2>
+      <span class="chip chip-fill">Jun 2026</span>
+    </div>
+    <p class="sheet-brief">A hand-operated two-stage lever press for 330 ml aluminium cans, sized so one hand can crush a can.</p>
+
+    <div class="kv">
+      <div><strong class="num">20 : 1</strong><span>ideal mechanical advantage (300/60 × 200/50)</span></div>
+      <div><strong class="num">1,715 N</strong><span>platen force from 100 N at the handle, at 85.7% efficiency</span></div>
+      <div><strong class="num">1,193 N</strong><span>peak crush force of a 330 ml can, from the literature</span></div>
+      <div><strong class="num">1,250 N</strong><span>platen force in the SolidWorks design study</span></div>
+    </div>
+
+    <div class="cols">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/can-r-iso2.jpg" alt="Rendered isometric view of the can crusher with a can under the platen" loading="lazy"></div>
+        <figcaption><b>Final. </b>Handle lever, coupler, platen lever and guided platen. Visualization finish.</figcaption>
+      </figure>
+      <div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <tr><th>Check</th><th>Factor of safety</th></tr>
+            <tr><td>Printed PETG link, bending</td><td>3.75</td></tr>
+            <tr><td>Steel pin Ø8 mm, double shear</td><td>6.38</td></tr>
+            <tr><td>Bearing in PETG link</td><td>2.88</td></tr>
+          </table>
+        </div>
+        <div class="note" style="margin-top:18px">
+          <h3>Method</h3>
+          <ul>
+            <li>Free-body diagrams for both stages, pin reactions at A and B.</li>
+            <li>Links in 3D-printed PETG, pins in S275 steel.</li>
+            <li>Design study over three linkage variables, 29 scenarios, 17 solved. Selected: arm a2 = 200, coupler 145, b2 = 100.</li>
+          </ul>
+          <p class="small" style="margin-top:10px">Role: mechanism design, calculations, SolidWorks model and design study.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="sub">From concept to final</p>
+    <div class="rev">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/can-concept.jpg" alt="Concept sketch of the lever mechanism with dimensions and the force path" loading="lazy"></div>
+        <figcaption><span class="rev-tag">1</span>Concept sketch, forces and dimensions</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/can-cad-iso.jpg" alt="First CAD linkage with a single post and a long handle" loading="lazy"></div>
+        <figcaption><span class="rev-tag">2</span>First linkage in CAD</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/can-cad-v2-iso.jpg" alt="Revised CAD linkage with a double link and low handle" loading="lazy"></div>
+        <figcaption><span class="rev-tag">3</span>Revised geometry, double link</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/can-r-side.jpg" alt="Final can crusher, side view with a can under the platen" loading="lazy"></div>
+        <figcaption><span class="rev-tag">4</span>Final design, side view</figcaption>
+      </figure>
+    </div>
+
+    <p class="sub">Drawings</p>
+    <div class="grid grid-2">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/can-dwg.jpg" alt="Dimensioned top, front and isometric views of the can crusher" loading="lazy"></div>
+        <figcaption><b>Dimensions. </b>Top, front and isometric</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/can-views.jpg" alt="Orthographic views with the 100 N input and 1,715 N output forces labelled" loading="lazy"></div>
+        <figcaption><b>Views. </b>Top, front, side with F_in and F_out labelled</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========================= A4 WALL JIB CRANE ========================= -->
+  <section class="sheet" id="a4">
+    <div class="sheet-head">
+      <span class="sheet-no">A4</span>
+      <h2>Wall-mounted jib crane, 250 kg</h2>
+      <span class="chip chip-fill">Hand calc + FEA</span>
+    </div>
+    <p class="sheet-brief">A twin-truss cantilever jib bolted to a building wall, with a trolley hoist on its runway. Designed from a sketch, calculated by hand to a lifting-appliance method, then checked in SolidWorks Simulation.</p>
+
+    <div class="kv">
+      <div><strong class="num">250 kg</strong><span>rated hook load</span></div>
+      <div><strong class="num">1.5 m</strong><span>reach: three 0.5 m bays, 0.5 m deep</span></div>
+      <div><strong class="num">SHS 40×40×4</strong><span>S355J2H steel, K-braced web</span></div>
+      <div><strong class="num">FOS 8.35</strong><span>hand check, worst chord, limit 2</span></div>
+      <div><strong class="num">0.15 mm</strong><span>tip deflection in FEA, limit 2.5 mm (L/600)</span></div>
+    </div>
+
+    <div class="cols">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-iso.jpg" alt="Isometric view of the wall-mounted twin-truss jib crane with trolley hoist and a banded load" loading="lazy"></div>
+        <figcaption><b>Iso. </b>Twin K-truss, two U-section runway rails, trolley hoist, 250 kg load.</figcaption>
+      </figure>
+      <div class="note">
+        <h3>Scope</h3>
+        <ul>
+          <li>Two parallel K-trusses joined by six cross members, pinned to the wall at the bottom chord and tied back at the top chord.</li>
+          <li>Trolley with wire-rope hoist running on two U-section rails under the bottom chord.</li>
+          <li>Loads per EN 13001-style practice: hoisting class HC2, dynamic factor 1.14, trolley and hoist dead load, self-weight at every node, 10% connection allowance.</li>
+          <li>Hoist drive sized: 406 W required, 0.55 kW 4-pole motor with 55:1 worm reduction selected.</li>
+        </ul>
+        <p class="small" style="margin-top:12px">Role: concept, CAD, hand calculations, FEA. Tools: SolidWorks, SolidWorks Simulation (beam mesh). The hoist and hook use catalogue geometry.</p>
+      </div>
+    </div>
+
+    <p class="sub">Concept to model</p>
+    <div class="cols">
+      <figure class="fig fig-tall">
+        <div class="fig-mat"><img src="img/wj-sketch.jpg" alt="Concept sheet with top, front and side planes, member counts, hoist detail and 250 kg load" loading="lazy"></div>
+        <figcaption><b>Concept. </b>Top, front and side planes with member counts: 6 top chords, 12 K-bracing members, 8 verticals, 6 cross members.</figcaption>
+      </figure>
+      <div class="grid" style="margin-top:0">
+        <figure class="fig">
+          <div class="fig-mat"><img src="img/wj-side.jpg" alt="Side elevation of the crane showing the three K-bays, wall and hanging load" loading="lazy"></div>
+          <figcaption><b>Front. </b>Three K-bays, trolley at the tip, load hanging</figcaption>
+        </figure>
+        <figure class="fig">
+          <div class="fig-mat"><img src="img/wj-hoist.jpg" alt="Close-up render of the trolley hoist under the runway rails" loading="lazy"></div>
+          <figcaption><b>Trolley. </b>Hoist drum, motor and trolley on the U-section rails</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="grid grid-3">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-top.jpg" alt="Top view of the crane showing the square truss frame and trolley" loading="lazy"></div>
+        <figcaption><b>Top. </b>Frame, rails and hoist, seen from above</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-load.jpg" alt="Rendered banded load block on the hook" loading="lazy"></div>
+        <figcaption><b>Load. </b>Banded test load on the hook</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-site.jpg" alt="Photo of a wall-mounted truss jib crane on a concrete building under construction" loading="lazy"></div>
+        <figcaption><b>On site. </b>Wall-mounted jib on a building under construction. Photo enhanced with AI.</figcaption>
+      </figure>
+    </div>
+
+    <p class="sub">Hand calculation against FEA</p>
+    <div class="cols">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>Quantity (one truss)</th><th>Hand</th><th>FEA</th></tr>
+          <tr><td>Wall reaction, horizontal</td><td>5,520 N</td><td>5,330 N</td></tr>
+          <tr><td>Wall reaction, vertical</td><td>2,085 N</td><td>1,980 N</td></tr>
+          <tr><td>Tip deflection</td><td>0.134 mm</td><td>0.148 mm</td></tr>
+          <tr><td>Largest member force</td><td>5,520 N</td><td>3,401 N</td></tr>
+          <tr><td>Peak stress</td><td>42.5 MPa</td><td>6.6 MPa</td></tr>
+        </table>
+        <p class="small" style="margin-top:10px">Reactions agree within 5%. The hand check is deliberately conservative: it puts the whole horizontal reaction through one chord and adds local runway bending from the trolley wheel load, which the node-loaded FEA does not include. Both are far below yield.</p>
+      </div>
+      <div class="note">
+        <h3>Load path</h3>
+        <ul>
+          <li>Tip node: (2,798 N amplified hook load + 294 N trolley) / 2 trusses + 49 N self-weight = 1,595 N.</li>
+          <li>Moment about the lower pin gives 5,520 N in the top link and the same in the runway chord.</li>
+          <li>Combined stress 9.9 MPa axial + 32.7 MPa bending = 42.5 MPa against 355 MPa yield.</li>
+          <li>FEA: 316 beam elements, 332 nodes, linear static, gravity plus 1,546 N nodal load per truss.</li>
+        </ul>
+        <p class="small" style="margin-top:10px">The FEA study uses SolidWorks' generic steel (250 MPa yield); the factor of safety above uses S355J2H properties.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-fea-model.jpg" alt="Beam model of the truss with fixtures and the tip load" loading="lazy"></div>
+        <figcaption><b>Set-up. </b>Beam model with wall pins, top link and tip load</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-fea-react.jpg" alt="Reaction forces at the wall pin of one truss, FX 5.33 kN and FY 1.98 kN" loading="lazy"></div>
+        <figcaption><b>Reactions. </b>Wall pin: FX 5.33 kN, FY 1.98 kN, resultant 5.68 kN</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-fea-axial.jpg" alt="Axial force diagram over all truss members" loading="lazy"></div>
+        <figcaption><b>Axial force. </b>Members in compression (blue) and tension (red), peak 3.4 kN</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-fea-stress.jpg" alt="Upper-bound axial and bending stress plot, maximum 6.57 MPa" loading="lazy"></div>
+        <figcaption><b>Stress. </b>Upper-bound axial plus bending, maximum 6.57 MPa</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-mat"><img src="img/wj-fea-disp.jpg" alt="Resultant displacement plot, maximum 0.148 mm at the tip" loading="lazy"></div>
+        <figcaption><b>Displacement. </b>Maximum 0.148 mm at the free tip</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========================= A5 FURNITURE LIFTS ========================= -->
+  <section class="sheet" id="a5">
+    <div class="sheet-head">
+      <span class="sheet-no">A5</span>
+      <h2>Furniture lifts, five concepts to 15 m</h2>
+      <span class="chip chip-fill">5 designs</span>
+    </div>
+    <p class="sheet-brief">Five design iterations of a mobile lift for carrying furniture up to 15 m, developed for a construction-equipment company (client name withheld). Same brief, five different mechanisms. Select a tab to switch between them.</p>
+    <div class="tbl-wrap" style="margin-top:18px"><table class="tbl cmp"><tr><th>Concept</th><th>Lifting method</th><th>Carrier</th></tr>
+<tr><td>1 Belt mast</td><td>Flat belts and DC motor</td><td>2.0 × 1.0 × 0.5 m</td></tr>
+<tr><td>2 Folding ladder</td><td>Telescopic cylinders</td><td>1.5 × 0.75 m</td></tr>
+<tr><td>3 Telescopic boom</td><td>Luffing boom, chain basket</td><td>2.5 × 1.5 m basket</td></tr>
+<tr><td>4 Articulated boom</td><td>Cylinders, links and telescope screw</td><td>1.7 × 1.5 m</td></tr>
+<tr><td>5 Scissor lift</td><td>Three cylinders</td><td>1.8 × 1.0 m</td></tr></table></div>
+    <div class="tablist" role="tablist" aria-label="Furniture lift concepts"><button role="tab" id="fl-t1" aria-controls="fl-p1" aria-selected="true" tabindex="0" type="button">1 Belt mast</button><button role="tab" id="fl-t2" aria-controls="fl-p2" aria-selected="false" tabindex="-1" type="button">2 Folding ladder</button><button role="tab" id="fl-t3" aria-controls="fl-p3" aria-selected="false" tabindex="-1" type="button">3 Telescopic boom</button><button role="tab" id="fl-t4" aria-controls="fl-p4" aria-selected="false" tabindex="-1" type="button">4 Articulated boom</button><button role="tab" id="fl-t5" aria-controls="fl-p5" aria-selected="false" tabindex="-1" type="button">5 Scissor lift</button></div>
+    <div class="tabpanels">
+    <div class="tabpanel" role="tabpanel" id="fl-p1" aria-labelledby="fl-t1">
+      <div class="panel-head"><h3>Belt-driven three-stage mast</h3><span class="chip chip-fill">Concept 1</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A lattice mast in three sliding stages, pulled up by two flat belts from a DC motor on the deck. A 2 m × 1 m furniture carrier rides the top stage. Designed to reach a 15 m working height.</p>
+      <div class="kv"><div><strong class="num">15 m</strong><span>design height limit</span></div><div><strong class="num">3 stages</strong><span>V-truss, 4.5 to 5.0 m each</span></div><div><strong class="num">2 belts</strong><span>flat belts over 10 GT3 pulleys, Ø260 mm</span></div><div><strong class="num">Ø750 mm</strong><span>two drive pulleys on the DC motor shaft</span></div><div><strong class="num">≈ 1.4 t</strong><span>structural steel mass, estimate</span></div></div>
+      <p class="sub">Stowed and extended</p><div class="grid grid-2"><figure class="fig fig-tall"><div class="fig-mat"><img src="img/fl1-iso-a.jpg" alt="Isometric render of the mast on its chassis, retracted" loading="lazy"></div><figcaption><b>Stowed. </b>Retracted, carrier at deck height</figcaption></figure><figure class="fig fig-tall"><div class="fig-mat"><img src="img/fl1-extended.jpg" alt="Render of the mast fully extended with the carrier at the top" loading="lazy"></div><figcaption><b>Extended. </b>Fully extended, three stages stepped</figcaption></figure></div><div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl1-carrier-a.jpg" alt="Carrier tray on the mast, close-up" loading="lazy"></div><figcaption><b>Carrier. </b>Furniture carrier on its slider</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl1-drive.jpg" alt="Motor and large drive pulley on the chassis, close-up" loading="lazy"></div><figcaption><b>Drive. </b>Large drive pulley and the lower belt pulleys</figcaption></figure></div><div class="grid grid-2"><figure class="fig"><video src="vid/fl1-assembly.mp4" muted loop playsinline controls preload="metadata" aria-label="Assembly motion study of the belt-driven mast"></video><figcaption><b>Motion. </b>Mast stages extending in the assembly</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl1-dwg-1.jpg" alt="Drawing sheet with top, front and right views and dimensions" loading="lazy"></div><figcaption><b>Drawing. </b>Top, front and right views with dimensions</figcaption></figure></div>
+      <div class="note" style="margin-top:18px"><h3>Mass estimate <span class="chip" style="vertical-align:middle;margin-left:8px">Estimate</span></h3><p>From the bill of materials, with hollow-section areas: base frame 504 kg, vertical stages 416 kg, deck plate 177 kg, wheel shafts 128 kg, carrier 137 kg, aluminium guides 61 kg, about 1.4 t in total. The motor, belts, pulleys and wheels are not included.</p></div>
+      <p class="sub">Bill of materials</p>
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Lower bracing</td><td>A36, SHS 80 × 80 × 5</td><td>1</td></tr><tr><td>Belt pulley</td><td>A36, GT3 type, Ø260 mm</td><td>10</td></tr><tr><td>Slider and guide line</td><td>steel and aluminium slider on a vertical steel guide</td><td>2</td></tr><tr><td>Furniture carrier</td><td>A36, 2 × 1 × 0.5 m, 3.5 mm sheet</td><td>1</td></tr><tr><td>Column trusses</td><td>A36, SHS 30 × 30 × 2.6</td><td>3</td></tr><tr><td>Large pulleys</td><td>A36, Ø750 mm, driven by the DC motor</td><td>2</td></tr><tr><td>Wheels</td><td>rubber tyre, steel rim</td><td>4</td></tr></table></div>
+      
+    </div>
+    <div class="tabpanel" role="tabpanel" id="fl-p2" aria-labelledby="fl-t2">
+      <div class="panel-head"><h3>Folding ladder on telescopic cylinders</h3><span class="chip chip-fill">Concept 2</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A three-section lattice ladder that unfolds in a zig-zag as telescopic hydraulic cylinders push it up. The furniture sits on a 1.5 × 0.75 m carrier plate, with ramp tracks down to the ground.</p>
+      <div class="kv"><div><strong class="num">3 sections</strong><span>folding lattice ladder, SHS 40 × 40 × 4 truss</span></div><div><strong class="num">2 cylinders</strong><span>telescopic, 3.1 m, 5 stages each</span></div><div><strong class="num">150 to 160 bar</strong><span>hydraulic operating pressure</span></div><div><strong class="num">5 × 2 m</strong><span>steel deck plate on a 40 × 40 × 4 frame</span></div></div>
+      <div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl2-iso.jpg" alt="Render of the folding ladder with two telescopic cylinders and links on the deck" loading="lazy"></div><figcaption><b>Folded. </b>Folded ladder, links and cylinders on the deck</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl2-extended.jpg" alt="Render of the ladder raised with the cylinders extended" loading="lazy"></div><figcaption><b>Raised. </b>Ladder raised on the cylinders</figcaption></figure></div><div class="grid grid-3"><figure class="fig"><div class="fig-mat"><img src="img/fl2-b.jpg" alt="Carrier plate and ground ramp tracks, close-up" loading="lazy"></div><figcaption><b>Carrier. </b>Carrier plate and ground ramp</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl2-ladder.jpg" alt="Three lattice ladder sections shown side by side" loading="lazy"></div><figcaption><b>Sections. </b>Three ladder sections with hooks</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl2-folded.jpg" alt="Render showing the folded ladder next to the cylinders" loading="lazy"></div><figcaption><b>Cylinders. </b>Cylinders beside the folded ladder</figcaption></figure></div><div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl2-dwg-open.jpg" alt="Drawing sheet with the model in the open position, with dimensions" loading="lazy"></div><figcaption><b>Drawing. </b>Open position, dimensions in metres</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl2-dwg-closed.jpg" alt="Drawing sheet with the model closed, with dimensions" loading="lazy"></div><figcaption><b>Drawing. </b>Closed position, dimensions in metres</figcaption></figure></div>
+      
+      <p class="sub">Bill of materials</p>
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Basement frame</td><td>A36, 40 × 40 × 4</td><td>1</td></tr><tr><td>Tyre assembly</td><td>rubber tyre, steel rim</td><td>4</td></tr><tr><td>Telescopic hydraulic cylinder</td><td>3.1 m long, 30 to 50 mm wall; 5 stages each</td><td>2</td></tr><tr><td>Link connection</td><td>alloy steel, 1.45 × 0.16 × 0.10 m</td><td>2</td></tr><tr><td>Shaft</td><td>alloy steel, Ø80 × 2,100 mm</td><td>2</td></tr><tr><td>Folding ladder</td><td>A36, tube Ø33.7 × 4.0</td><td>1</td></tr><tr><td>Ladder path</td><td>A36, C-channel 125 × 40 × 20</td><td>2</td></tr><tr><td>Carrier</td><td>A36 plate, 1.5 × 0.75 × 0.25 m, 10 mm</td><td>1</td></tr><tr><td>Base deck plate</td><td>alloy steel, 5 × 2 m, 10 mm</td><td>1</td></tr><tr><td>Ground ramp track</td><td>A36, 0.7 × 1 m</td><td>1</td></tr></table></div>
+      <p class="small" style="margin-top:12px">Operating pressure is the designer's calculated range for this lift.</p>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="fl-p3" aria-labelledby="fl-t3">
+      <div class="panel-head"><h3>Luffing telescopic boom with chain basket</h3><span class="chip chip-fill">Concept 3</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A pivoting lattice boom in two telescoping sections on a four-wheel base. Hydraulic cylinders raise the boom to 53°, and the basket hangs from a pulley by a chain at the tip. The carrier is 15 m above the ground.</p>
+      <div class="kv"><div><strong class="num">15 m</strong><span>height to the carrier, at a 53° boom angle</span></div><div><strong class="num">9.25 + 7.03 m</strong><span>inner and outer boom sections</span></div><div><strong class="num">2</strong><span>rotational hydraulic cylinders</span></div><div><strong class="num">150 to 160 bar</strong><span>hydraulic operating pressure</span></div><div><strong class="num">2.5 × 1.5 m</strong><span>basket footprint</span></div></div>
+      <div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl3-extended.jpg" alt="Render of the boom extended out with the basket hanging from the tip" loading="lazy"></div><figcaption><b>Extended. </b>Boom out, basket on the chain</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl3-side53.jpg" alt="Side view of the boom raised at 53 degrees with the 15 m height dimension" loading="lazy"></div><figcaption><b>53°. </b>Raised at 53°, 15 m to the carrier</figcaption></figure></div><div class="grid grid-3"><figure class="fig"><div class="fig-mat"><img src="img/fl3-raised.jpg" alt="Render of the boom raised on its cylinder" loading="lazy"></div><figcaption><b>Raised. </b>Boom on its luffing cylinder</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl3-basket.jpg" alt="Chain pulley and the basket, close-up" loading="lazy"></div><figcaption><b>Basket. </b>Chain pulley and basket</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl3-pivot.jpg" alt="Cylinder pivot on the boom, close-up" loading="lazy"></div><figcaption><b>Joint. </b>Cylinder pin joint on the boom</figcaption></figure></div><div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl3-dwg.jpg" alt="Drawing sheet with top, front and right views and dimensions" loading="lazy"></div><figcaption><b>Drawing. </b>Top, front and right views</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl3-base.jpg" alt="Deck with support tower and cylinder mount, close-up" loading="lazy"></div><figcaption><b>Base. </b>Support tower and cylinder mount on the deck</figcaption></figure></div>
+      
+      <p class="sub">Bill of materials</p>
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Base</td><td>A36, 60 × 40 × 3.2</td><td>1</td></tr><tr><td>Load plate</td><td>A36, spreads the load over the base trusses</td><td>1</td></tr><tr><td>Support truss</td><td>A36, 60 × 40 × 3.2</td><td>1</td></tr><tr><td>Tyre assembly</td><td>rubber tyre, steel rim</td><td>4</td></tr><tr><td>Outer boom</td><td>A36, 50 × 30 × 2.6</td><td>1</td></tr><tr><td>Inner boom</td><td>A36, 50 × 30 × 2.6</td><td>1</td></tr><tr><td>Pulley</td><td>alloy steel, chain pulley</td><td>1</td></tr><tr><td>Carrier</td><td>A36, 2.5 × 1.5 × 1.25 m</td><td>1</td></tr><tr><td>Rotational hydraulic cylinders</td><td>cylinder 30 cm + plunger 25 cm</td><td>2</td></tr></table></div>
+      <p class="small" style="margin-top:12px">Operating pressure is the designer's calculated range for this lift.</p>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="fl-p4" aria-labelledby="fl-t4">
+      <div class="panel-head"><h3>Articulated boom on a wide base</h3><span class="chip chip-fill">Concept 4</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A two-stage lattice mast on a wide four-wheel chassis, raised by two hydraulic cylinders. A driven steel screw of my own design opens and closes the telescopic section. A 1.7 × 1.5 m carrier hangs from a pulley at the top, 15 m above the ground.</p>
+      <div class="kv"><div><strong class="num">15.04 m</strong><span>height to the carrier</span></div><div><strong class="num">2 stages</strong><span>vertical trusses of 5.8 m and 5.0 m</span></div><div><strong class="num">2</strong><span>hydraulic cylinders</span></div><div><strong class="num">150 to 160 bar</strong><span>hydraulic operating pressure</span></div><div><strong class="num">1.7 × 1.5 m</strong><span>carrier</span></div></div>
+      <div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl4-upright.jpg" alt="Render of the mast upright with the carrier at the top" loading="lazy"></div><figcaption><b>Upright. </b>Mast upright, carrier at 15 m</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl4-reach.jpg" alt="Render of the boom reaching out with the carrier hanging at the tip" loading="lazy"></div><figcaption><b>Reach. </b>Boom reaching out</figcaption></figure></div><div class="grid grid-3"><figure class="fig"><div class="fig-mat"><img src="img/fl4-iso-a.jpg" alt="Render of the boom raised with the cylinder and link frame" loading="lazy"></div><figcaption><b>Raised. </b>Boom raised on the cylinder and link frame</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl4-bracing.jpg" alt="Link frame and screw joint, close-up" loading="lazy"></div><figcaption><b>Links. </b>Steel links and the driven screw that opens and closes the telescopic section</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl4-cyl.jpg" alt="Cylinder pin joint at the boom head, close-up" loading="lazy"></div><figcaption><b>Joint. </b>Cylinder pin joint at the boom head</figcaption></figure></div><div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl4-chassis.jpg" alt="Underside of the chassis showing the lattice frame and the wheels" loading="lazy"></div><figcaption><b>Chassis. </b>Chassis underside, lattice frame</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl4-dwg.jpg" alt="Drawing sheet with top, front and side views and dimensions" loading="lazy"></div><figcaption><b>Drawing. </b>Top, front and side views, details A to I</figcaption></figure></div>
+      
+      <p class="sub">Bill of materials</p>
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Base columns</td><td>A36, SHS 40 × 40 × 5, 960 mm</td><td>12</td></tr><tr><td>Base beams</td><td>A36, SHS 40 × 40 × 5, 4,000 mm</td><td>2</td></tr><tr><td>Base trusses</td><td>A36, SHS 20 × 20 × 2, 1,200 mm</td><td>70</td></tr><tr><td>Wheel shaft</td><td>alloy steel tube Ø120 / Ø100, 3,200 mm</td><td>2</td></tr><tr><td>Vertical truss 1</td><td>A36, columns SHS 40 × 40 × 5 × 5,800 mm; beams 500 mm; trusses SHS 20 × 20 × 2 × 550 mm</td><td>4 / 8 / 22</td></tr><tr><td>Vertical truss 2</td><td>A36, columns SHS 40 × 40 × 5 × 5,000 mm; beams 475 mm; trusses SHS 20 × 20 × 2 × 530 mm</td><td>4 / 8 / 26</td></tr><tr><td>Horizontal truss</td><td>A36, SHS 20 × 20 × 2</td><td>1</td></tr><tr><td>Carrier</td><td>A36, 1,700 × 1,500 × 60 mm</td><td>1</td></tr><tr><td>Driven screw</td><td>A36, L 1,800 mm, Ø200 mm</td><td>1</td></tr><tr><td>Steel links</td><td>2,250 × 200 × 200 mm</td><td>2</td></tr></table></div>
+      <p class="small" style="margin-top:12px">Operating pressure is the designer's calculated range for this lift.</p>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="fl-p5" aria-labelledby="fl-t5">
+      <div class="panel-head"><h3>Scissor lift to 15 m</h3><span class="chip chip-fill">Concept 5</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A scissor lift that rises from 3.33 m stowed to 15.04 m, the required working height, on three hydraulic cylinders. A 1.8 × 1.0 m railed platform carries the furniture, and a stair at the rear of the chassis gives access.</p>
+      <div class="kv"><div><strong class="num">15.04 m</strong><span>extended height, platform at the top</span></div><div><strong class="num">3.33 m</strong><span>stowed height, a 4.5 : 1 extension</span></div><div><strong class="num">18 pairs</strong><span>scissor arms</span></div><div><strong class="num">3</strong><span>hydraulic cylinders, Ø100 × 1.25 m, rod Ø50 × 1 m</span></div><div><strong class="num">200 kg</strong><span>design load of furniture</span></div></div>
+      <div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl5-iso-a.jpg" alt="Render of the scissor lift extended with the platform at the top" loading="lazy"></div><figcaption><b>Extended. </b>Platform at 15 m</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl5-dwg-1.jpg" alt="Drawing sheet with front, top and side views showing 3.33 m stowed and 15.04 m extended" loading="lazy"></div><figcaption><b>Drawing. </b>Front view stowed at 3.33 m, side view extended at 15.04 m</figcaption></figure></div><div class="grid grid-2"><figure class="fig"><div class="fig-mat"><img src="img/fl5-stowed.jpg" alt="Render of the scissor lift stowed with the platform at the top of the folded arms" loading="lazy"></div><figcaption><b>Stowed. </b>Scissor arms folded, platform at 3.33 m</figcaption></figure><figure class="fig"><div class="fig-mat"><img src="img/fl5-platform.jpg" alt="Close-up of the railed platform on the top pair of scissor arms with the cylinder" loading="lazy"></div><figcaption><b>Platform. </b>Railed platform on the top scissor pair, with the cylinder</figcaption></figure></div><div class="cols"><figure class="fig fig-tall"><div class="fig-mat"><img src="img/fl5-sketch.jpg" alt="Concept sheet with the truss base, scissor arm, scissor base layout, rack-and-pinion option and hydraulic cylinders" loading="lazy"></div><figcaption><b>Concept. </b>Truss base, scissor arm, base layout with a rack-and-pinion drive option, hydraulic cylinders.</figcaption></figure><div class="note"><h3>Structure</h3><ul><li>Base frame from 44.2 m of A36 SHS 40 × 40 × 4, about 200 kg.</li><li>Deck plate 3 × 1 × 0.005 m, 118 kg. Carrier plate 1.8 × 1.0 × 0.01 m, 141 kg.</li></ul></div></div>
+      
+      <p class="sub">Bill of materials</p>
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Base trusses (bracing)</td><td>A36, 40 × 40 × 4</td><td>1</td></tr><tr><td>Base plate</td><td>A36, 3 × 1 × 0.005 m</td><td>1</td></tr><tr><td>Stairs</td><td>A36, 1 × 0.75 × 0.25 m</td><td>1</td></tr><tr><td>Pair of scissors</td><td>A36, 1.5 × 0.15 × 0.1 m</td><td>18</td></tr><tr><td>Base of scissor</td><td>alloy steel, 1.75 × 1 × 0.1 m</td><td>1</td></tr><tr><td>Tyre assembly</td><td>rubber tyre, steel rim</td><td>4</td></tr><tr><td>Hydraulic cylinder</td><td>cylinder steel 1.25 m × Ø0.1 m; piston 1 m × Ø0.05 m</td><td>3</td></tr><tr><td>Carrier</td><td>alloy steel, 1.8 × 1.0 × 0.01 m</td><td>1</td></tr></table></div>
+      
+    </div>
+    </div>
+  </section>
+
+  <!-- ========================= A6 SOLAR SCREEN ========================= -->
+  <section class="sheet" id="a6">
+    <div class="sheet-head">
+      <span class="sheet-no">A6</span>
+      <h2>Mobile solar-powered rotating displays</h2>
+      <span class="chip chip-fill">3 designs</span>
+    </div>
+    <p class="sheet-brief">Three designs of a self-powered advertising screen on casters. Each turns a large screen and its solar panels on a slewing mast, with the mass, rotation torque, daily energy, panel and battery sized from the model. Select a tab to switch between them.</p>
+    <div class="tbl-wrap" style="margin-top:18px"><table class="tbl cmp"><tr><th>Model</th><th>Screen</th><th>Solar</th><th>Battery</th><th>Motor</th></tr><tr><td>1 Truss base</td><td>73 in LED</td><td>1 × 800 W</td><td>24 V 210 Ah</td><td>100 W, 8 N·m</td></tr><tr><td>2 Ladder tower</td><td>1,186 pixel cubes</td><td>1 × 700 W</td><td>12 V 400 Ah</td><td>12 W, 1.3 N·m</td></tr><tr><td>3 Low frame</td><td>100 in LED</td><td>2 × 750 W</td><td>24 V 350 Ah</td><td>60 W, 8 N·m</td></tr></table></div>
+    <div class="tablist" role="tablist" aria-label="Solar display designs"><button role="tab" id="sd-t1" aria-controls="sd-p1" aria-selected="true" tabindex="0" type="button">1 Truss base</button><button role="tab" id="sd-t2" aria-controls="sd-p2" aria-selected="false" tabindex="-1" type="button">2 Ladder tower</button><button role="tab" id="sd-t3" aria-controls="sd-p3" aria-selected="false" tabindex="-1" type="button">3 Low frame</button></div>
+    <div class="tabpanels">
+    <div class="tabpanel" role="tabpanel" id="sd-p1" aria-labelledby="sd-t1">
+      <div class="panel-head"><h3>Truss base, screen and panel back to back</h3><span class="chip chip-fill">Model 1</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A self-powered advertising screen on a caster-mounted aluminium truss base. A large LED screen and an 800 W solar panel are mounted back to back on one mast. A slewing bearing and geared DC motor turn the pair, so the panel can face the sun and the screen can face the audience.</p>
+          <div class="kv"><div><strong class="num">3.02 m</strong><span>overall height, on four casters</span></div><div><strong class="num">73 in</strong><span>1651 × 930 mm screen, back to back with the PV panel</span></div><div><strong class="num">800 W</strong><span>solar PV panel, 1964 × 970 mm</span></div><div><strong class="num">24 V 210 Ah</strong><span>lithium battery, sized for 24 h screen use</span></div><div><strong class="num">100 W</strong><span>24 V geared DC motor, 90 rpm, 8 N·m</span></div></div>
+    <div class="cols">
+      <figure class="fig fig-tall"><div class="fig-mat"><img src="img/sd-back.jpg" alt="Render of the display unit on its truss base, blue screen side with the solar panel behind" loading="lazy"></div><figcaption><b>Unit. </b>Screen side, panel behind, truss base on casters</figcaption></figure>
+      <div class="note">
+        <h3>Scope</h3>
+        <ul>
+          <li>Welded 30 × 30 × 3 aluminium 1060 truss base, 430 mm wide, with four Ø140 urethane casters so one person can move it.</li>
+          <li>Ø75 mast on a slewing bearing, driven by a 100 W 24 V motor and spur pinion that sit inside the Ø149 housing.</li>
+          <li>Four 1000 × 150 × 20 supports clamp the screen and panel to the mast through slotted holes.</li>
+          <li>Mass, rotation torque, daily energy, panel and battery sizing worked out from the model.</li>
+        </ul>
+        <p class="small" style="margin-top:12px">Role: concept, CAD, calculations. Tools: SolidWorks. The motor, screen, panel and battery use catalogue geometry.</p>
+      </div>
+    </div>
+    <p class="sub">Model</p>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/sd-face.jpg" alt="Render of the unit with the solar panel side facing the viewer" loading="lazy"></div><figcaption><b>Panel. </b>Solar side</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd-panel.jpg" alt="Close-up render of the 800 W solar panel and its back support" loading="lazy"></div><figcaption><b>Close-up. </b>800 W panel on its back support</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd-rear.jpg" alt="Render of the rear of the mast with two slotted support brackets" loading="lazy"></div><figcaption><b>Rear. </b>Slotted brackets clamp both faces to the mast</figcaption></figure>
+    </div>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/sd-slew.jpg" alt="Render of the slewing bearing and the motor inside the housing" loading="lazy"></div><figcaption><b>Rotation. </b>Slewing bearing, pinion and motor in the mast housing</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd-battery.jpg" alt="Render of the battery on the top of the truss base next to the slewing ring" loading="lazy"></div><figcaption><b>Battery. </b>On the base top beside the slewing ring</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd-caster.jpg" alt="Render of a swivel caster with urethane wheel on the truss base" loading="lazy"></div><figcaption><b>Caster. </b>Swivel caster, Ø140 urethane wheel</figcaption></figure>
+    </div>
+    <p class="sub">Drawing</p>
+    <figure class="fig fig-wide"><div class="fig-mat"><img src="img/sd-dwg.jpg" alt="Drawing sheet with top, front and side views, overall dimensions and details B to E" loading="lazy"></div><figcaption><b>Drawing. </b>Overall height 3,022 mm; details B to E: housing, slewing ring, caster and bearing section</figcaption></figure>
+    <p class="sub">Mass</p>
+    <div class="cols">
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Item</th><th>Size</th><th>Qty</th><th>Mass, kg</th></tr><tr><td>Base beams</td><td>30×30×3, 430 mm</td><td>8</td><td>3.02</td></tr><tr><td>Base truss members</td><td>30×30×3, 601 mm</td><td>8</td><td>4.22</td></tr><tr><td>Base columns</td><td>30×30×3, 670 mm</td><td>8</td><td>4.71</td></tr><tr><td>Cross beams</td><td>30×30×3, 500 mm</td><td>2</td><td>0.87</td></tr><tr><td>Base plate</td><td>1000 × 150 × 20</td><td>1</td><td>8.10</td></tr><tr><td>Cylinder 1</td><td>Ø148.5, wall 7.21, 260 mm</td><td>1</td><td>1.16</td></tr><tr><td>Cylinder 2 (mast)</td><td>Ø75, wall 10, 1850 mm</td><td>1</td><td>5.51</td></tr><tr><td>Panel and screen supports</td><td>1000 × 150 × 20</td><td>4</td><td>32.40</td></tr><tr><td><b>Aluminium 1060 structure</b></td><td>ρ = 2700 kg/m³</td><td></td><td><b>59.99</b></td></tr><tr><td>Assumed: motor 5, PV panel 15, tyres 4, rotating mechanism 5, battery 10, screen 25</td><td></td><td></td><td>64.00</td></tr><tr><td><b>Total, estimate</b></td><td></td><td></td><td><b>123.99</b></td></tr></table></div>
+      <div class="note">
+        <h3>Load path <span class="chip" style="vertical-align:middle;margin-left:8px">Check</span></h3>
+        <p>124 kg gives 1.22 kN, or 0.305 kN on each of four base columns. A method-of-joints check on the base truss gives 0.305 kN compression in each column and no force in the diagonals.</p>
+        <p style="margin-top:8px">The battery and panel masses are assumed, and a 5 kWh lithium pack weighs more than 10 kg. At 180 kg, each column carries 0.44 kN: 1.4 MPa on a 324 mm² section, against a 27.6 MPa yield for annealed 1060. The base is not governed by strength.</p>
+      </div>
+    </div>
+    <p class="sub">Power and solar sizing</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Step</th><th>Result</th></tr><tr><td>Rotating mass (supports, cylinders, holder, mechanism, screen, PV)</td><td>87.67 kg</td></tr><tr><td>Torque: inertia 0.47 + friction (μ = 0.15) 7.14</td><td>7.61 N·m</td></tr><tr><td>Motor power, 0 to 90 rpm in 3 s, η = 0.85</td><td>84 W, selected 100 W</td></tr><tr><td>Screen 120 W × 24 h</td><td>2,880 Wh</td></tr><tr><td>Motor 2 h per day</td><td>≈ 170 Wh</td></tr><tr><td>Daily demand, and with 0.85 system losses</td><td>≈ 3,050 Wh, ≈ 3,590 Wh</td></tr><tr><td>PV yield 800 W × 5.5 sun hours</td><td>4,400 Wh, 0.82 panel, 1 fitted</td></tr><tr><td>Battery: 3,050 Wh ÷ (24 V × 0.8 DoD × 0.9)</td><td>≈ 177 Ah, 210 Ah fitted</td></tr><tr><td>Full charge from the panel, 210 Ah × 24 V ÷ (800 W × 0.9)</td><td>7 h</td></tr></table></div>
+    <p class="small" style="margin-top:12px">The rotation torque assumes steel-on-steel friction at the shaft radius, which is conservative for a slewing bearing. The motor is rated 8 N·m against 7.6 N·m required.</p>
+    <p class="sub">Bill of materials</p>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Base beam, truss, column and cross-beam structure</td><td>AL 1060 ALLOY, SHS 30 × 30 × 3 MM</td><td>8 + 8 + 8 + 2</td></tr><tr><td>Base plate</td><td>AL 1060 ALLOY</td><td>1</td></tr><tr><td>Caster wheel</td><td>SOLID URETHANE, Ø140, 42 MM THICK</td><td>4</td></tr><tr><td>Lithium battery</td><td>24 V</td><td>1</td></tr><tr><td>Slewing bearing</td><td>MILD STEEL, RING 1 Ø163.2 MM, RING 2 Ø129.6 MM, 9.1 MM WIDE</td><td>1</td></tr><tr><td>DC motor and spur gear pinion</td><td>100 W, 24 V, 8 N·m, 90 RPM; STEEL AND PLASTIC</td><td>1</td></tr><tr><td>Support</td><td>AL 1060 ALLOY, 1000 × 150 × 20 MM</td><td>4</td></tr><tr><td>Cylinder 1 and 2</td><td>AL 1060 ALLOY, Ø148.5 × 260 MM AND Ø75 × 1850 MM</td><td>1 + 1</td></tr><tr><td>Support member</td><td>AL 1060 ALLOY, 310 MM, HALF CIRCLE Ø75</td><td>1</td></tr><tr><td>Screen, 73 in</td><td>PET AND PLASTIC, 1651 × 930 × 45 MM</td><td>1</td></tr><tr><td>Solar PV panel</td><td>ALUMINIUM, PLASTIC, SILICON; 1964 × 970 × 25 MM, 800 W</td><td>1</td></tr></table></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="sd-p2" aria-labelledby="sd-t2">
+      <div class="panel-head"><h3>Ladder tower with pixel-cube screen</h3><span class="chip chip-fill">Model 2</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A 3.2 m aluminium K-truss tower on a wide caster deck. A pixel-cube LED screen turns on a pipe at the top, a tilted solar panel hangs on a side frame, and a counterweight keeps the tower balanced.</p>
+      <div class="kv"><div><strong class="num">3.16 m</strong><span>overall height on four Ø200 casters</span></div><div><strong class="num">1.8 × 1.8 m</strong><span>aluminium deck under a 750 mm square tower</span></div><div><strong class="num">1,186</strong><span>pixel-cube LED screen, turning on a Ø50 pipe</span></div><div><strong class="num">700 W</strong><span>one tilted panel, 2000 × 1000 mm</span></div><div><strong class="num">12 V 400 Ah</strong><span>lithium battery</span></div></div>
+    <div class="cols">
+      <figure class="fig fig-tall"><div class="fig-mat"><img src="img/sd2-sketch.jpg" alt="Hand sketch of the tower, ladder, K-truss section, caster wheels and the plate, bearing and motor stack" loading="lazy"></div><figcaption><b>Sketch. </b>Hand sketch: 3,200 mm tower, K-truss, ladder, casters, and the plate, bearing and motor stack that turns the screen</figcaption></figure>
+      <div class="note">
+        <h3>Scope</h3>
+        <ul>
+          <li>K-truss tower of 50 × 50 × 5 aluminium 1060 on a 1.8 × 1.8 m deck, with an access ladder so the screen and panel can be reached.</li>
+          <li>Screen on a Ø50 pipe, carried by a roller thrust bearing on the tower top plate and turned by a 12 W, 70 rpm DC motor underneath.</li>
+          <li>Panel hung on a side frame; a counterweight on the opposite face balances it.</li>
+          <li>Mass, rotation torque, daily energy, panel and battery sizing worked out from the model.</li>
+        </ul>
+        <p class="small" style="margin-top:12px">Role: concept, CAD, calculations. Tools: SolidWorks. Motor, bearing, battery, screen and panel use catalogue geometry.</p>
+      </div>
+    </div>
+    <p class="sub">Model</p>
+    <div class="grid grid-2">
+      <figure class="fig"><div class="fig-mat"><img src="img/sd2-tower.jpg" alt="Render of the K-truss tower with ladder, counterweight and screen on top" loading="lazy"></div><figcaption><b>Tower. </b>Tower, ladder and counterweight</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd2-panel.jpg" alt="Render of the tower with the solar panel hung on its side frame" loading="lazy"></div><figcaption><b>Panel. </b>Panel on its side frame</figcaption></figure>
+    </div>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/sd2-bearing.jpg" alt="Render of the roller bearing and pipe on the tower top plate" loading="lazy"></div><figcaption><b>Bearing. </b>Roller bearing on the top plate</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd2-motor.jpg" alt="Render of the DC motor hanging under the top plate beside the ladder" loading="lazy"></div><figcaption><b>Motor. </b>Motor under the plate</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd2-counter.jpg" alt="Render of the counterweight block on its cantilever beams" loading="lazy"></div><figcaption><b>Balance. </b>Counterweight on cantilever beams</figcaption></figure>
+    </div>
+    <div class="grid grid-2">
+      <figure class="fig"><div class="fig-mat"><img src="img/sd2-battery.jpg" alt="Render of the lithium battery on the deck beside the tower" loading="lazy"></div><figcaption><b>Battery. </b>Battery on the deck</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd2-dwg.jpg" alt="Drawing sheet with top, front and side views and dimensions" loading="lazy"></div><figcaption><b>Drawing. </b>Overall height 3,156 mm; deck 1,800 mm square</figcaption></figure>
+    </div>
+    <p class="sub">Mass</p>
+    <div class="cols">
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Item</th><th>Size</th><th>Qty</th><th>Mass, kg</th></tr><tr><td>Base plate</td><td>1800 × 1800 × 3 mm</td><td>1</td><td>26.24</td></tr><tr><td>Base columns</td><td>50×50×5, 1475 mm</td><td>8</td><td>28.67</td></tr><tr><td>Base beams</td><td>50×50×5, 750 mm</td><td>12</td><td>21.87</td></tr><tr><td>Base trusses</td><td>50×50×5, 948 mm</td><td>16</td><td>36.86</td></tr><tr><td>Other base beams</td><td>50×50×5, 869 mm</td><td>2</td><td>4.22</td></tr><tr><td>Plate 2</td><td>750 × 750 × 3 mm</td><td>1</td><td>4.56</td></tr><tr><td>Ladder pipes</td><td>Ø25, 3130 mm</td><td>4</td><td>3.15</td></tr><tr><td>Ladder steps</td><td>Ø25, 325 mm</td><td>41</td><td>3.36</td></tr><tr><td>Pipe</td><td>Ø50, 1000 mm</td><td>1</td><td>1.91</td></tr><tr><td>Supporting beams</td><td>30×30×3, 400 mm</td><td>4</td><td>1.40</td></tr><tr><td>Counterweight</td><td>allowance</td><td>1</td><td>10.00</td></tr><tr><td><b>Aluminium 1060 structure</b></td><td></td><td></td><td><b>142.24</b></td></tr><tr><td>Assumed: motor 5, PV panel 10, tyres 8, rotating parts 10, battery 8, screen 20</td><td></td><td></td><td>61.00</td></tr><tr><td><b>Total, estimate</b></td><td></td><td></td><td><b>203.24</b></td></tr></table></div>
+      <div class="note">
+        <h3>Load path <span class="chip" style="vertical-align:middle;margin-left:8px">Check</span></h3>
+        <p>203 kg gives 1.99 kN, or 0.50 kN on each of four columns. The truss check gives 0.50 kN compression in each column and no force in the diagonals. On a 900 mm² section that is 0.6 MPa.</p>
+        <p style="margin-top:8px">Battery, panel and screen masses are assumed. A 4.8 kWh lithium pack weighs more than 8 kg, so the real load is higher, but the tower is not governed by strength.</p>
+      </div>
+    </div>
+    <p class="sub">Power and solar sizing</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Step</th><th>Result</th></tr><tr><td>Rotating mass: pipe, bearing, screen</td><td>44.88 kg</td></tr><tr><td>Torque: inertia 0.07 + friction (μ = 0.2, shaft r = 15 mm) 1.32</td><td>1.39 N·m</td></tr><tr><td>Motor power, 0 to 70 rpm in 2 s, η = 0.85</td><td>10 W output, 12 W input, 12 W selected</td></tr><tr><td>Screen: 1,186 pixel cubes × 0.1 W, 24 h</td><td>118.6 W, 2,846 Wh</td></tr><tr><td>Motor 5 h per day</td><td>≈ 60 Wh</td></tr><tr><td>Daily demand</td><td>≈ 2,906 Wh</td></tr><tr><td>PV: 2,906 Wh ÷ (5.5 sun hours × 0.8)</td><td>660 W, one 700 W panel</td></tr><tr><td>Battery: 2,906 Wh ÷ (0.8 DoD × 0.9) ÷ 12 V</td><td>336 Ah, 400 Ah fitted</td></tr><tr><td>Full charge: 4,036 Wh ÷ (700 W × 0.9)</td><td>6.4 h</td></tr></table></div>
+    <p class="small" style="margin-top:12px">The 0.1 W per pixel cube is an assumed figure. The motor is rated 1.3 N·m against 1.39 N·m calculated, which is within 6% and conservative, since the friction term uses the shaft radius on a rolling bearing.</p>
+    <p class="sub">Bill of materials</p>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Base plate</td><td>AL 1060 ALLOY, 1800 × 1800 × 3 MM</td><td>1</td></tr><tr><td>Base columns, beams, trusses, other beams</td><td>AL 1060 ALLOY, SHS 50 × 50 × 5 MM, 1475 / 750 / 948 / 869 MM</td><td>8 + 12 + 16 + 2</td></tr><tr><td>Plate 2</td><td>AL 1060 ALLOY, 750 × 750 × 3 MM</td><td>1</td></tr><tr><td>Ladder pipes and steps</td><td>AL 1060 ALLOY, Ø25 MM, 3130 AND 325 MM LONG</td><td>4 + 41</td></tr><tr><td>Caster wheel</td><td>POLYOLEFIN, Ø200 MM, 87 MM THICK</td><td>4</td></tr><tr><td>Battery</td><td>LITHIUM, 12 V 400 AH, 257 × 360 × 355 MM</td><td>1</td></tr><tr><td>Roller bearing</td><td>PLAIN STEEL, Ø150 MM, 93 MM, 8 ROLLERS Ø24 × 27 MM</td><td>1</td></tr><tr><td>Pipe</td><td>AL 1060 ALLOY, Ø50 MM, 1000 MM LONG</td><td>1</td></tr><tr><td>Supporting beams</td><td>AL 1060 ALLOY, 30 × 30 × 3 MM, 400 MM</td><td>4</td></tr><tr><td>Counterweight</td><td>-</td><td>1</td></tr><tr><td>Solar PV panel</td><td>700 W, 2000 × 1000 × 30 MM</td><td>1</td></tr><tr><td>Pixel cubes screen</td><td>1,186 CUBES, 50.8 × 50.8 MM, 1640 MM WIDE</td><td>1</td></tr><tr><td>DC motor</td><td>12 W, 1.3 N·M, 70 RPM, Ø79 × 296 MM</td><td>1</td></tr></table></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="sd-p3" aria-labelledby="sd-t3">
+      <div class="panel-head"><h3>Low frame with V-roof panels and 100 in screen</h3><span class="chip chip-fill">Model 3</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A compact 800 mm frame carrying a 2.4 m aluminium mast. The mast turns a 100 in screen and a V-shaped roof of two 750 W panels together, driven by a 60 W motor on a turntable bearing.</p>
+      <div class="kv"><div><strong class="num">100 in</strong><span>screen, 2214 × 1245 mm</span></div><div><strong class="num">2 × 750 W</strong><span>panels in a V-shaped roof</span></div><div><strong class="num">Ø160 × 2.4 m</strong><span>aluminium mast on a turntable</span></div><div><strong class="num">24 V 350 Ah</strong><span>lithium battery</span></div><div><strong class="num">60 W</strong><span>DC motor, 8 N·m, 60 rpm</span></div></div>
+    <div class="cols">
+      <figure class="fig fig-tall"><div class="fig-mat"><img src="img/sd3-back.jpg" alt="Render from behind of the unit with the V-shaped roof of two solar panels, the mast and the screen bracket" loading="lazy"></div><figcaption><b>Rear. </b>Rear: V-roof of two panels, mast, screen bracket</figcaption></figure>
+      <div class="note">
+        <h3>Scope</h3>
+        <ul>
+          <li>Low 800 × 800 mm aluminium frame, 500 mm high, on four braked Ø140 casters.</li>
+          <li>Ø160 mast on a turntable bearing, turned by a 60 W motor mounted under the top frame.</li>
+          <li>A 100 in screen on a 1250 × 350 bracket, and two 750 W panels in a V on a ribbed plate at the mast top, so the panels follow the sun as the screen turns.</li>
+          <li>Mass, rotation torque, daily energy, panel and battery sizing worked out from the model.</li>
+        </ul>
+        <p class="small" style="margin-top:12px">Role: concept, CAD, calculations. Tools: SolidWorks. Motor, bearing, battery, screen and panels use catalogue geometry.</p>
+      </div>
+    </div>
+    <p class="sub">Model</p>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/sd3-panel.jpg" alt="Render of the front of the unit with the V-shaped roof of solar panels above the mast" loading="lazy"></div><figcaption><b>Panels. </b>V-roof of two panels, seen from the front</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd3-screen.jpg" alt="Render of the screen face on the mast with the panel roof above and the caster frame below" loading="lazy"></div><figcaption><b>Screen. </b>Screen face on the mast</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd3-turntable.jpg" alt="Render of the mast on its turntable bearing, with the battery box and motor below the top frame" loading="lazy"></div><figcaption><b>Turntable. </b>Turntable, motor and battery box on the frame</figcaption></figure>
+    </div>
+    <div class="grid grid-2">
+      <figure class="fig"><div class="fig-mat"><img src="img/sd3-caster.jpg" alt="Render of a braked caster wheel on the frame corner" loading="lazy"></div><figcaption><b>Caster. </b>Braked caster, Ø140</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/sd3-dwg.jpg" alt="Drawing sheet with top, front and side views, dimensions and details A, D and E" loading="lazy"></div><figcaption><b>Drawing. </b>Mast 2,400 mm on a 500 mm frame; panels 1,013 mm on the slope</figcaption></figure>
+    </div>
+    <p class="sub">Mass</p>
+    <div class="cols">
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Item</th><th>Size</th><th>Qty</th><th>Mass, kg</th></tr><tr><td>Beams</td><td>50×50×10, 700 mm</td><td>10</td><td>30.24</td></tr><tr><td>Columns</td><td>50×50×10, 500 mm</td><td>4</td><td>8.64</td></tr><tr><td>Bracing</td><td>50×50×10, 721 mm</td><td>4</td><td>12.46</td></tr><tr><td>Base plate</td><td>800 × 800 × 3 mm</td><td>1</td><td>5.18</td></tr><tr><td>Aluminium rod (mast)</td><td>Ø160 / Ø145, 2400 mm</td><td>1</td><td>23.28</td></tr><tr><td>Bracket</td><td>1250 × 350 × 20, four Ø50 holes</td><td>1</td><td>23.20</td></tr><tr><td>Ribs</td><td>triangle 150 × 300 × 25</td><td>4</td><td>6.07</td></tr><tr><td>Aluminium plate</td><td>900 × 900 × 10 mm</td><td>1</td><td>21.87</td></tr><tr><td>Support beams</td><td>50×50×5, 900 mm</td><td>2</td><td>4.37</td></tr><tr><td><b>Aluminium 1060 structure</b></td><td></td><td></td><td><b>135.33</b></td></tr><tr><td>Assumed: motor 6, PV panels 12, tyres 5, rotating mechanism 7, battery 8.5, screen 30</td><td></td><td></td><td>68.50</td></tr><tr><td><b>Total, estimate</b></td><td></td><td></td><td><b>203.83</b></td></tr></table></div>
+      <div class="note">
+        <h3>Load path <span class="chip" style="vertical-align:middle;margin-left:8px">Check</span></h3>
+        <p>204 kg gives 2.00 kN, or 0.50 kN per caster. The truss check gives 0.50 kN compression in each column and no force in the diagonals. On a 1600 mm² section that is 0.3 MPa.</p>
+        <p style="margin-top:8px">Battery, panel and screen masses are assumed. A 8.4 kWh lithium pack weighs far more than 8.5 kg, so the real load is higher, but the frame is not governed by strength.</p>
+      </div>
+    </div>
+    <p class="sub">Power and solar sizing</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Step</th><th>Result</th></tr><tr><td>Rotating mass: rod, swivel plate, screen, bracket</td><td>83.48 kg</td></tr><tr><td>Torque: inertia 1.75 + friction (μ = 0.25, shaft r = 10.5 mm) 2.15 + offset allowance 4.10</td><td>7.99 N·m</td></tr><tr><td>Motor power, 60 rpm, 3 s start, η = 0.85</td><td>59 W, 60 W selected</td></tr><tr><td>Screen 230 W × 24 h</td><td>5,520 Wh</td></tr><tr><td>Motor 6 h per day</td><td>≈ 354 Wh</td></tr><tr><td>Daily demand</td><td>≈ 5,874 Wh</td></tr><tr><td>PV: 5,874 Wh ÷ (750 W × 0.75 × 5.5 h)</td><td>1.90, two 750 W panels</td></tr><tr><td>Battery: 5,874 Wh ÷ (24 V × 0.9 × 0.8)</td><td>340 Ah, 350 Ah fitted</td></tr><tr><td>Full charge: 350 Ah × 24 V ÷ (2 × 750 W × 0.9)</td><td>6.2 h</td></tr></table></div>
+    <p class="small" style="margin-top:12px">The torque includes a 4.1 N·m allowance for the offset of the rotating mass, which is conservative. Without it the demand is 3.9 N·m, about 29 W. The motor is rated 8 N·m against 7.99 N·m calculated.</p>
+    <p class="sub">Bill of materials</p>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Material and size</th><th>Qty</th></tr><tr><td>Beams structure</td><td>ALUMINUM 1060 ALLOY, 50 × 50 × 10 MM, 700 MM</td><td>10</td></tr><tr><td>Columns structure</td><td>ALUMINUM 1060 ALLOY, 50 × 50 × 10 MM, 500 MM</td><td>4</td></tr><tr><td>Bracing structure</td><td>ALUMINUM 1060 ALLOY, 50 × 50 × 10 MM, 721 MM</td><td>4</td></tr><tr><td>Base plate</td><td>ALUMINUM 1060 ALLOY, 800 × 800 × 3 MM</td><td>1</td></tr><tr><td>Lazy turntable</td><td>MILD STEEL, EACH PLATE 245 × 245 × 10 MM</td><td>1</td></tr><tr><td>DC motor</td><td>60 W, 8 N·M, 60 RPM, SHAFT 21 MM</td><td>1</td></tr><tr><td>Caster wheel</td><td>RUBBER TIRES WITH BRAKES, Ø140 MM, 34 MM WIDE</td><td>4</td></tr><tr><td>Lithium battery</td><td>24 V 350 AH, 180 × 130 × 100 MM</td><td>1</td></tr><tr><td>Aluminum rod</td><td>ALUMINUM 1060 ALLOY, Ø160 / Ø145 MM, 2400 MM</td><td>1</td></tr><tr><td>Bracket</td><td>1250 × 350 × 20 MM, FOUR Ø50 MM HOLES</td><td>1</td></tr><tr><td>Rib</td><td>TRIANGLE, 25 MM THICK, 150 × 300 MM</td><td>4</td></tr><tr><td>Aluminum plate</td><td>ALUMINUM 1060 ALLOY, 900 × 900 × 10 MM</td><td>1</td></tr><tr><td>Screen, 100 in</td><td>2214 × 1245 × 50 MM</td><td>1</td></tr><tr><td>Mounted bearing</td><td>OUTER Ø200 MM, INNER Ø160 MM, 100 MM LONG</td><td>1</td></tr><tr><td>Solar panel</td><td>750 W, 2136 × 1013 × 35 MM</td><td>2</td></tr><tr><td>Support beams</td><td>ALUMINUM 1060 ALLOY, 50 × 50 × 5 MM, 900 MM</td><td>2</td></tr></table></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ========================= A7 CENTRIFUGAL PUMPS ========================= -->
+  <section class="sheet" id="a7">
+    <div class="sheet-head">
+      <span class="sheet-no">A7</span>
+      <h2>Centrifugal pumps, three designs</h2>
+      <span class="chip chip-fill">3 designs</span>
+    </div>
+    <p class="sheet-brief">Three small centrifugal water pumps for a 100 W shaft power and a 2 m lift. Each is sized with one-dimensional pump theory, modelled in SolidWorks and studied in SolidWorks Flow Simulation. Select a tab to switch between them.</p>
+    <div class="tbl-wrap" style="margin-top:18px"><table class="tbl cmp"><tr><th>Model</th><th>Speed</th><th>Impeller</th><th>Blades</th><th>Design duty</th><th>Status</th></tr><tr><td>1 Seven-blade</td><td>1500 rpm</td><td>Ø116.9 mm</td><td>7, 30° / 20°</td><td>3.16 L/s at 2.1 m</td><td>Casing printed</td></tr><tr><td>2 Compact</td><td>2000 rpm</td><td>Ø76.3 mm</td><td>7, 30° / 24°</td><td>2.85 L/s at 2.15 m</td><td>Flow study: 2.3 L/s at 2.13 m</td></tr><tr><td>3 Closed impeller</td><td>1500 rpm</td><td>Ø107.9 mm</td><td>6, 32° / 24°</td><td>2.14 L/s at 2.15 m</td><td>Printable parts, BOM</td></tr></table></div>
+    <div class="tablist" role="tablist" aria-label="Centrifugal pump designs"><button role="tab" id="pm-t1" aria-controls="pm-p1" aria-selected="true" tabindex="0" type="button">1 Seven-blade</button><button role="tab" id="pm-t2" aria-controls="pm-p2" aria-selected="false" tabindex="-1" type="button">2 Compact</button><button role="tab" id="pm-t3" aria-controls="pm-p3" aria-selected="false" tabindex="-1" type="button">3 Closed impeller</button></div>
+    <div class="tabpanels">
+    <div class="tabpanel" role="tabpanel" id="pm-p1" aria-labelledby="pm-t1">
+      <div class="panel-head"><h3>Seven-blade pump, 1500 rpm</h3><span class="chip chip-fill">Model 1</span></div>
+      <p class="sheet-brief" style="margin-top:10px">The first design: a 100 W pump for a 2 m lift. It was sized from the power balance, modelled in SolidWorks, and the casing was printed to check the fit.</p>
+      <div class="kv"><div><strong class="num">3.16 L/s</strong><span>design flow at 2.1 m head</span></div><div><strong class="num">Ø117 mm</strong><span>7-blade impeller, β₁ 30°, β₂ 20°</span></div><div><strong class="num">1500 rpm</strong><span>24 V 100 W BLDC motor</span></div><div><strong class="num">65 W</strong><span>hydraulic power at 0.65 efficiency</span></div><div><strong class="num">Printed</strong><span>volute, lid and suction inlet in FDM</span></div></div>
+    <div class="cols">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-a.jpg" alt="Render of the pump with teal stands, volute, suction flange and motor box" loading="lazy"></div><figcaption><b>Pump. </b>Volute with a discharge flange on top, suction inlet at the front, motor box behind</figcaption></figure>
+      <div class="note"><h3>Scope</h3><ul><li>Volute casing with a spiral collector sized for 3 m/s, on two ring stands.</li><li>Seven backward-curved blades on an open-faced disc, bored for a 14 mm shaft.</li><li>Duty set by shaft power, hydraulic efficiency and head: three lift cases from 1.0 to 2.0 m.</li><li>Casing parts printed in FDM; flow studied in SolidWorks Flow Simulation.</li></ul><p class="small" style="margin-top:12px">Role: sole engineer. Hydraulic sizing, SolidWorks CAD, flow simulation. Tools: SolidWorks, Flow Simulation.</p></div>
+    </div>
+    <p class="sub">Model</p>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-b.jpg" alt="Render of the pump from the motor side" loading="lazy"></div><figcaption><b>Rear. </b>Motor side</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-c.jpg" alt="Render of the volute seen from the back with the teal impeller inside" loading="lazy"></div><figcaption><b>Impeller. </b>Impeller inside the open volute</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-section.jpg" alt="Cut-away render of the impeller and volute cross-section" loading="lazy"></div><figcaption><b>Section. </b>Cut through the volute and impeller</figcaption></figure>
+    </div>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-imp.jpg" alt="Render of the seven-blade impeller" loading="lazy"></div><figcaption><b>Impeller. </b>Seven blades</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-imp2.jpg" alt="Render of the impeller from the side showing the hub" loading="lazy"></div><figcaption><b>Hub. </b>Hub and blade profile</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-impdwg.jpg" alt="Dimensioned impeller drawing with blade angles 30 and 20 degrees" loading="lazy"></div><figcaption><b>Blade. </b>Blade angles 30° and 20°</figcaption></figure>
+    </div>
+    <div class="grid grid-2">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-dims.jpg" alt="Render of the pump with the key diameters dimensioned" loading="lazy"></div><figcaption><b>Sizes. </b>Key diameters: Ø80 discharge, Ø75, Ø64, Ø52</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm1-dwg.jpg" alt="Drawing sheet with top, front and side views of the pump" loading="lazy"></div><figcaption><b>Drawing. </b>Impeller Ø117, suction Ø53.4, discharge Ø80</figcaption></figure>
+    </div>
+    <p class="sub">Prototype</p>
+    <div class="grid grid-2">
+      <figure class="fig fig-tall"><div class="fig-mat"><img src="img/pm1-print1.jpg" alt="Photograph of the printed blue volute casing held in a hand" loading="lazy"></div><figcaption><b>Print. </b>Printed volute casing and lid</figcaption></figure>
+      <figure class="fig fig-tall"><div class="fig-mat"><img src="img/pm1-print2.jpg" alt="Photograph of the printed blue casing on the printer bed with support structures still attached" loading="lazy"></div><figcaption><b>Print. </b>On the printer bed, supports still attached</figcaption></figure>
+    </div>
+    <p class="sub">Flow simulation</p>
+    <div class="grid grid-2">
+      <figure class="fig"><video src="vid/pm1-pressure.mp4" muted loop playsinline controls preload="metadata" aria-label="Pressure with flow trajectories"></video><figcaption><b>Pressure. </b>Pressure with flow trajectories</figcaption></figure>
+      <figure class="fig"><video src="vid/pm1-velocity.mp4" muted loop playsinline controls preload="metadata" aria-label="Velocity with flow trajectories"></video><figcaption><b>Velocity. </b>Velocity with flow trajectories</figcaption></figure>
+    </div>
+    <p class="small" style="margin-top:12px">Preliminary transient run, not carried to convergence. The images are qualitative and no head, flow or efficiency is claimed from them.</p>
+    <p class="sub">Hydraulic sizing</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Quantity</th><th>Result</th></tr><tr><td>Hydraulic power: 0.65 × 100 W</td><td>65 W</td></tr><tr><td>Head: 2.0 m lift + 0.1 m losses</td><td>2.1 m</td></tr><tr><td>Flow: 65 ÷ (997 × 9.81 × 2.1)</td><td>3.165 L/s</td></tr><tr><td>Slip factor, Wiesner, 7 blades</td><td>0.717</td></tr><tr><td>Outlet speed u₂</td><td>9.18 m/s</td></tr><tr><td>Impeller diameter d₂, 1500 rpm</td><td>116.9 mm</td></tr><tr><td>Outlet meridional speed c<sub>m2</sub></td><td>2.20 m/s</td></tr><tr><td>Outlet blade height b₂</td><td>3.91 mm</td></tr><tr><td>Outlet tangential speed c<sub>u2</sub>, with slip (3.13 m/s without)</td><td>2.24 m/s</td></tr><tr><td>Hub diameter, 1.35 × 14 mm shaft</td><td>18.9 mm</td></tr><tr><td>Inlet eye diameter, solved from β₁ = 30° (53.4 mm in CAD)</td><td>53.1 mm</td></tr><tr><td>Inlet speeds: c<sub>m1</sub> 1.62 m/s, u₁ 2.84 m/s, ratio 0.569 (tan 30° = 0.577)</td><td>at 53.4 mm</td></tr><tr><td>Inlet blade height b₁</td><td>11.7 mm</td></tr><tr><td>Collector area, 3 m/s: 1.055 × 10⁻³ m²; equivalent diameter</td><td>36.7 mm</td></tr><tr><td>Volute centreline radius: d₂/2 + 5% gap + d<sub>eq</sub>/2</td><td>82.6 mm</td></tr><tr><td>Collector axial width, ≥ 1.1 × b₂</td><td>4.30 mm</td></tr></table></div>
+    <p class="sub">Duty points at 65 W</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Static lift</th><th>Total head</th><th>Flow at 65 W</th></tr><tr><td>2.0 m</td><td>2.1 m</td><td>3.16 L/s</td></tr><tr><td>1.5 m</td><td>1.6 m</td><td>4.15 L/s</td></tr><tr><td>1.0 m</td><td>1.1 m</td><td>6.04 L/s</td></tr></table></div>
+    <p class="small" style="margin-top:12px">Efficiency, blade count, flow coefficient (0.24) and collector speed are design inputs. Flow follows from the power balance P = ρ g H Q.</p>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="pm-p2" aria-labelledby="pm-t2">
+      <div class="panel-head"><h3>Compact pump, 2000 rpm</h3><span class="chip chip-fill">Model 2</span></div>
+      <p class="sheet-brief" style="margin-top:10px">A smaller, faster redesign that keeps the 100 W duty and 2 m lift. A flow study at the design head gives the head and efficiency that the pump actually reaches.</p>
+      <div class="kv"><div><strong class="num">2.85 L/s</strong><span>design flow at 2.15 m head</span></div><div><strong class="num">Ø76.3 mm</strong><span>7-blade impeller, β₁ 30°, β₂ 24°</span></div><div><strong class="num">2000 rpm</strong><span>100 W shaft power</span></div><div><strong class="num">2.13 m</strong><span>head from the flow study</span></div><div><strong class="num">51%</strong><span>efficiency from the flow study</span></div></div>
+    <div class="cols">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm2-a.jpg" alt="Render of the compact pump with orange cover plate, shaft and black stand" loading="lazy"></div><figcaption><b>Pump. </b>Compact casing on a printed stand, with the shaft through the cover plate</figcaption></figure>
+      <div class="note"><h3>Scope</h3><ul><li>Smaller, faster redesign: 76 mm impeller at 2000 rpm and a 24° outlet angle.</li><li>Compact volute with a tangential discharge pipe, on a two-leg stand.</li><li>Inlet eye and blade heights solved from the velocity triangles.</li><li>Flow study with a rotating region at design speed, run at the design head.</li></ul><p class="small" style="margin-top:12px">Role: sole engineer. Hydraulic sizing, SolidWorks CAD, flow simulation. Tools: SolidWorks, Flow Simulation.</p></div>
+    </div>
+    <p class="sub">Model</p>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm2-b.jpg" alt="Render of the pump from the suction side on its stand" loading="lazy"></div><figcaption><b>Pump. </b>Suction side</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm2-front.jpg" alt="Front render looking into the suction eye with the impeller visible" loading="lazy"></div><figcaption><b>Front. </b>Looking into the eye</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm2-imp.jpg" alt="Render of the curved-blade impeller" loading="lazy"></div><figcaption><b>Impeller. </b>Impeller</figcaption></figure>
+    </div>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm2-cut.jpg" alt="Cut-away render of the volute with the impeller inside" loading="lazy"></div><figcaption><b>Section. </b>Volute cut open</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm2-cutfront.jpg" alt="Front cut-away render of the volute with the impeller" loading="lazy"></div><figcaption><b>Volute. </b>Spiral collector around the impeller</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm2-impside.jpg" alt="Side drawing of the impeller showing the blade profile" loading="lazy"></div><figcaption><b>Blade. </b>Blade profile, side view</figcaption></figure>
+    </div>
+    <figure class="fig fig-wide"><div class="fig-mat"><img src="img/pm2-dwg.jpg" alt="Drawing sheet with top, front and side views of the pump" loading="lazy"></div><figcaption><b>Drawing. </b>Impeller Ø76.3, suction Ø52.5, discharge Ø45.3 and Ø55</figcaption></figure>
+    <p class="sub">Flow simulation</p>
+    <div class="grid grid-2">
+      <figure class="fig"><video src="vid/pm2-pressure.mp4" muted loop playsinline controls preload="metadata" aria-label="Pressure with flow trajectories"></video><figcaption><b>Pressure. </b>Pressure with flow trajectories, 2000 rpm</figcaption></figure>
+      <figure class="fig"><video src="vid/pm2-velocity.mp4" muted loop playsinline controls preload="metadata" aria-label="Velocity with flow trajectories"></video><figcaption><b>Velocity. </b>Velocity with flow trajectories, 2000 rpm</figcaption></figure>
+    </div>
+    <p class="small" style="margin-top:12px">SolidWorks Flow Simulation, transient, water at 20 °C, rotating region at 2000 rpm, environment pressure at the inlet and 122.35 kPa static pressure at the outlet, which is 101.3 kPa plus the 2.15 m design head. 21,647 cells, 470 iterations, all goals converged. One operating point on a coarse mesh, so the result is indicative.</p>
+    <p class="sub">Design against flow study</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Quantity</th><th>Design</th><th>CFD</th></tr><tr><td>Flow</td><td>2.85 L/s</td><td>2.3 L/s</td></tr><tr><td>Head</td><td>2.15 m</td><td>2.13 m</td></tr><tr><td>Shaft power</td><td>100 W</td><td>92.9 W</td></tr><tr><td>Hydraulic power</td><td>60 W</td><td>47.8 W</td></tr><tr><td>Efficiency</td><td>0.60, assumed</td><td>0.514</td></tr><tr><td>Torque</td><td></td><td>0.444 N·m</td></tr></table></div>
+    <p class="small" style="margin-top:12px">At the design head the pump passed 20% less than the 1D estimate and its efficiency came out at 51%, below the assumed 60%.</p>
+    <p class="sub">Hydraulic sizing</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Quantity</th><th>Result</th></tr><tr><td>Hydraulic power: 0.60 × 100 W</td><td>60 W</td></tr><tr><td>Head: 2.0 m lift + 0.15 m losses</td><td>2.15 m</td></tr><tr><td>Flow: 60 ÷ (997 × 9.81 × 2.15)</td><td>2.853 L/s</td></tr><tr><td>Slip factor, 7 blades</td><td>0.717</td></tr><tr><td>Outlet speed u₂</td><td>7.99 m/s</td></tr><tr><td>Impeller diameter d₂, 2000 rpm</td><td>76.3 mm</td></tr><tr><td>Outlet meridional speed c<sub>m2</sub></td><td>1.92 m/s</td></tr><tr><td>Outlet blade height b₂</td><td>6.21 mm</td></tr><tr><td>Hub diameter, 1.4 × 5 mm shaft</td><td>7.0 mm</td></tr><tr><td>Inlet eye diameter, solved from β₁ = 30°</td><td>47.5 mm</td></tr><tr><td>Inlet speeds: c<sub>m1</sub> 1.65 m/s, u₁ 2.85 m/s</td><td>ratio 0.577</td></tr><tr><td>Inlet blade height b₁</td><td>11.6 mm</td></tr><tr><td>Volute outer diameter, 1.15 × d₂</td><td>87.7 mm</td></tr><tr><td>Volute axial width, 1.35 × b₂</td><td>8.39 mm</td></tr><tr><td>Collector area, 3 m/s: 951 mm²; equivalent diameter</td><td>34.8 mm</td></tr></table></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="pm-p3" aria-labelledby="pm-t3">
+      <div class="panel-head"><h3>Closed-impeller pump with motor housing</h3><span class="chip chip-fill">Model 3</span></div>
+      <p class="sheet-brief" style="margin-top:10px">The most developed design: a closed impeller, the motor in a vented housing, flanged connections, and every part drawn for printing in PETG.</p>
+      <div class="kv"><div><strong class="num">2.14 L/s</strong><span>design flow at 2.15 m head</span></div><div><strong class="num">Ø108 mm</strong><span>closed impeller, 6 blades, β₁ 32°, β₂ 24°</span></div><div><strong class="num">1500 rpm</strong><span>100 W shaft power</span></div><div><strong class="num">45%</strong><span>conservative hydraulic efficiency for a small pump</span></div><div><strong class="num">PETG</strong><span>every casing part prepared for printing</span></div></div>
+    <div class="cols">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm3-a.jpg" alt="Render of the assembled green pump with its cylindrical motor housing and two steel stands" loading="lazy"></div><figcaption><b>Pump. </b>Assembled: volute, motor housing and two stands</figcaption></figure>
+      <div class="note"><h3>Scope</h3><ul><li>Third design: closed impeller, motor in its own vented housing, and a flanged inlet and discharge.</li><li>Every casing part drawn as a printable PETG shell, with a bill of materials.</li><li>Sizing follows the same method with a lower efficiency, 0.45, as a conservative figure for a small pump.</li><li>Flow study with a vertical discharge pipe to represent the lift.</li></ul><p class="small" style="margin-top:12px">Role: sole engineer. Hydraulic sizing, SolidWorks CAD, flow simulation. Tools: SolidWorks, Flow Simulation.</p></div>
+    </div>
+    <p class="sub">Model</p>
+    <figure class="fig"><video src="vid/pm3-assembly.mp4" muted loop playsinline controls preload="metadata" aria-label="Assembly animation"></video><figcaption><b>Assembly. </b>Parts come together into the pump</figcaption></figure>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm3-explode.jpg" alt="Exploded view of the pump: volute, impeller, motor housing, motor, flanges and stands" loading="lazy"></div><figcaption><b>Parts. </b>Exploded view</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm3-b.jpg" alt="Render of the pump from the suction side" loading="lazy"></div><figcaption><b>Suction. </b>Suction side</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm3-section.jpg" alt="Section render through the volute, impeller and motor" loading="lazy"></div><figcaption><b>Section. </b>Section through volute, impeller and motor</figcaption></figure>
+    </div>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/pm3-imp.jpg" alt="Render of the closed impeller" loading="lazy"></div><figcaption><b>Impeller. </b>Closed impeller</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm3-cut.jpg" alt="Half-section render of the impeller in its shroud" loading="lazy"></div><figcaption><b>Section. </b>Half section of the impeller</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/pm3-impdwg.jpg" alt="Impeller drawing, front view with blade outlines" loading="lazy"></div><figcaption><b>Blade. </b>Six blades, front view</figcaption></figure>
+    </div>
+    <figure class="fig fig-wide"><div class="fig-mat"><img src="img/pm3-dwg.jpg" alt="Drawing sheet with dimensions, blade angles 32 and 24 degrees and detail A" loading="lazy"></div><figcaption><b>Drawing. </b>Impeller Ø108, eye Ø45.5, blade angles 32° and 24°</figcaption></figure>
+    <p class="sub">Flow simulation</p>
+    <div class="grid grid-2">
+      <figure class="fig"><video src="vid/pm3-pressure.mp4" muted loop playsinline controls preload="metadata" aria-label="Pressure with flow trajectories"></video><figcaption><b>Pressure. </b>Pressure, with the vertical discharge pipe</figcaption></figure>
+      <figure class="fig"><video src="vid/pm3-velocity.mp4" muted loop playsinline controls preload="metadata" aria-label="Velocity with flow trajectories"></video><figcaption><b>Velocity. </b>Velocity, with the vertical discharge pipe</figcaption></figure>
+    </div>
+    <p class="small" style="margin-top:12px">Qualitative images from a SolidWorks Flow Simulation run. No head, flow or efficiency is claimed from them.</p>
+    <p class="sub">Hydraulic sizing</p>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Quantity</th><th>Result</th></tr><tr><td>Hydraulic power: 0.45 × 100 W</td><td>45 W</td></tr><tr><td>Head: 2.0 m lift + 0.15 m losses</td><td>2.15 m</td></tr><tr><td>Flow: 45 ÷ (997 × 9.81 × 2.15)</td><td>2.140 L/s</td></tr><tr><td>Slip factor, 6 blades</td><td>0.670</td></tr><tr><td>Outlet speed u₂</td><td>8.47 m/s</td></tr><tr><td>Impeller diameter d₂, 1500 rpm</td><td>107.9 mm</td></tr><tr><td>Outlet meridional speed c<sub>m2</sub>, φ₂ = 0.25</td><td>2.12 m/s</td></tr><tr><td>Outlet tangential speed c<sub>u2</sub>, with slip (3.71 m/s without)</td><td>2.49 m/s</td></tr><tr><td>Outlet blade height b₂</td><td>2.98 mm</td></tr><tr><td>Hub diameter, 1.3 × 14 mm shaft</td><td>18.2 mm</td></tr><tr><td>Inlet eye diameter, solved from β₁ = 32°</td><td>45.5 mm</td></tr><tr><td>Inlet speeds: c<sub>m1</sub> 1.56 m/s, u₁ 2.50 m/s</td><td>ratio 0.625</td></tr><tr><td>Inlet blade height b₁</td><td>9.57 mm</td></tr><tr><td>Collector area, 3 m/s: 713 mm²; equivalent diameter</td><td>30.1 mm</td></tr><tr><td>Volute centreline diameter, 1.20 × d₂</td><td>129.4 mm</td></tr><tr><td>Volute axial width, 1.475 × b₂</td><td>4.40 mm</td></tr></table></div>
+    <p class="small" style="margin-top:12px">The model carries these sizes: impeller Ø108, eye Ø45.5, blade angles 32° and 24°, as the drawing shows.</p>
+    <p class="sub">Bill of materials</p>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Part</th><th>Description</th><th>Material</th><th>Qty</th></tr><tr><td>Rectangular plate A / B</td><td>30 × 35 × 3 MM AND 80 × 35 × 3 MM, FILLET R5</td><td>PETG</td><td>4 + 4</td></tr><tr><td>Standing beam A / B</td><td>30 AND 80 MM LONG, 103 MM HIGH, 5 MM THICK</td><td>PETG</td><td>4 + 4</td></tr><tr><td>Standing circular A / B</td><td>R 32.8 / 27.8 × 85 MM AND R 69.4 / 64.4 × 200 MM, 5 MM THICK</td><td>PETG</td><td>4 + 4</td></tr><tr><td>Discharge pipe</td><td>Ø54 / Ø40 MM, 45 MM HIGH</td><td>PETG</td><td>1</td></tr><tr><td>Feed stator pipe</td><td>EYE Ø45.5 MM, 45 MM LONG, 5 MM THICK</td><td>PETG</td><td>1</td></tr><tr><td>Suction installation</td><td>Ø75.5 / Ø35 MM, 25 MM LONG, 5 MM THICK</td><td>PETG</td><td>1</td></tr><tr><td>Discharge installation</td><td>Ø75 / Ø40 MM, 5 MM THICK</td><td>PETG</td><td>1</td></tr><tr><td>Motor room</td><td>Ø128.75 MM, 155 MM LONG</td><td>PETG</td><td>1</td></tr><tr><td>Motor housing</td><td>90 × 90 MM, FILLET 10, 150 MM LONG</td><td>PETG</td><td>1</td></tr><tr><td>DC motor</td><td>90 × 90 MM, FILLET 10, 141 MM LONG</td><td>STEEL</td><td>1</td></tr><tr><td>Vent opening</td><td>70 MM SLOT, R10, 10 MM DEEP</td><td>-</td><td>2</td></tr><tr><td>Motor shaft</td><td>Ø14 MM, 52 MM LONG, KEY 1 × 45 MM</td><td>STEEL</td><td>1</td></tr><tr><td>Uniform vortex casing</td><td>CENTRELINE Ø160 MM, SECTION Ø30.14 MM, 3.5 MM WALL</td><td>PETG</td><td>1</td></tr><tr><td>Back pump lid</td><td>Ø150 / Ø14 MM, 5 MM THICK</td><td>PETG</td><td>1</td></tr><tr><td>Closed impeller, hub</td><td>Ø108 / Ø14 MM, 1.5 MM THICK</td><td>PETG</td><td>1</td></tr><tr><td>Closed impeller, shroud</td><td>Ø108 / Ø47.6 MM, 1.5 MM THICK</td><td>PETG</td><td>1</td></tr><tr><td>Closed impeller, blades</td><td>Ø108 MM, HUB Ø18.2 MM, β₁ 32°, β₂ 24°, b₁ 9 MM, b₂ 3 MM</td><td>PETG</td><td>6</td></tr></table></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ========================= A8 MUSHROOM MACHINE ========================= -->
+  <section class="sheet" id="a8">
+    <div class="sheet-head">
+      <span class="sheet-no">A8</span>
+      <h2>Automated mushroom harvesting machine</h2>
+      <span class="chip chip-fill">Design and detection</span>
+    </div>
+    <p class="sheet-brief">A picking robot for Dutch mushroom racks, with a fin-ray gripper chosen to lift soft caps without bruising them, and a YOLOv5 detector to find the mushrooms.</p>
+    
+    <div class="kv"><div><strong class="num">1 per 2 s</strong><span>pick rate the design is sized for</span></div><div><strong class="num">3 fingers</strong><span>fin-ray gripper on linkages</span></div><div><strong class="num">4 days</strong><span>solo design time</span></div><div><strong class="num">11</strong><span>hand-labelled images</span></div><div><strong class="num">0.51</strong><span>mAP@0.5, YOLOv5m, 3 validation images</span></div></div>
+    <div class="cols">
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-frame2.jpg" alt="Isometric render of the wheeled frame with two yellow uprights, a cross beam and the gripper hanging in the middle" loading="lazy"></div><figcaption><b>Machine. </b>Frame on four wheels, uprights on the long rails, cross beam and gripper trolley</figcaption></figure>
+      <div class="note"><h3>Scope</h3><ul><li>Cartesian picking robot on a wheeled frame, built to travel between Dutch growing racks without changing the rack.</li><li>Two uprights roll along the long rails, a cross beam spans them, and a trolley carries the gripper along it.</li><li>Three-finger gripper: parallelogram linkages carry ribbed fin-ray fingers that bend around the cap instead of pinching it.</li><li>Picking motions reduced to pull, twist and tilt, to keep the degrees of freedom low.</li><li>Stereo camera and a YOLOv5 detector to build the picking queue.</li></ul><p class="small" style="margin-top:12px">Role: sole engineer. Mechanical design in SolidWorks, picking strategy, detector training. Done during the JoVision traineeship, on request, in four working days. Electronics and control software were not built in that time.</p></div>
+    </div>
+    <p class="sub">Frame and gantry</p>
+    <div class="grid grid-2">
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-frame1.jpg" alt="Isometric render of the frame and gantry seen from the other corner" loading="lazy"></div><figcaption><b>Frame. </b>Second view of the frame</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-trolley.jpg" alt="Close render of the cross beam with the rolling trolley and the gripper underneath" loading="lazy"></div><figcaption><b>Trolley. </b>Trolley rolling on the cross beam, gripper below</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-carriage1.jpg" alt="Close render of a yellow upright carriage bolted to a rail with rollers and a cross-beam end" loading="lazy"></div><figcaption><b>Carriage. </b>Upright carriage on the rail, cross beam passing through</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-carriage2.jpg" alt="Close render of the yellow upright carriage with bolt heads and rollers on the rail" loading="lazy"></div><figcaption><b>Carriage. </b>Carriage with four fixing bolts and rail rollers</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-roller.jpg" alt="Close render of two roller bearings on shafts running along a square rail" loading="lazy"></div><figcaption><b>Rollers. </b>Roller bearings on the rail</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-wheel.jpg" alt="Close render of a wheel and the yellow carriage bracket on the frame" loading="lazy"></div><figcaption><b>Wheel. </b>Wheel on the frame corner</figcaption></figure>
+    </div>
+    <p class="sub">Gripper</p>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-grip1.jpg" alt="Render of the gripper with the three fin-ray fingers open" loading="lazy"></div><figcaption><b>Open. </b>Fingers open</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-grip2.jpg" alt="Render of the gripper with the fingers part-closed" loading="lazy"></div><figcaption><b>Closing. </b>Fingers closing</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-grip3.jpg" alt="Render of the gripper with the fingers closed to a point" loading="lazy"></div><figcaption><b>Closed. </b>Fingers closed</figcaption></figure>
+    </div>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-gripTop.jpg" alt="Top view of the gripper showing three linkage arms spaced at 120 degrees around the central drive" loading="lazy"></div><figcaption><b>Top. </b>Top view: three arms around the central drive</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-gripFront.jpg" alt="Front view of the gripper showing the parallelogram linkages and the ribbed fingers" loading="lazy"></div><figcaption><b>Front. </b>Front view: parallelogram linkages and ribbed fingers</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-gripTrolley.jpg" alt="Render of the gripper hanging under its trolley on the cross beam" loading="lazy"></div><figcaption><b>Mounting. </b>Gripper under the trolley</figcaption></figure>
+    </div>
+    <p class="sub">Components selected</p>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Item</th><th>Selected</th></tr><tr><td>Gantry axes</td><td>Stepper motors, NEMA 17, 0.7 N·m continuous, up to 6 axes</td></tr><tr><td>Gripper drives</td><td>4 servo drives</td></tr><tr><td>Gripper material</td><td>Aluminium for the custom housing</td></tr><tr><td>Fingers</td><td>Fin-ray fingers, Festo type, for soft round objects</td></tr><tr><td>Vision</td><td>Stereo camera on the frame, sliding clear of the rack</td></tr><tr><td>Pick rate</td><td>About 1 mushroom per 2 s, as a design target</td></tr></table></div>
+    <p class="small" style="margin-top:12px">Selected from catalogues to size the design. None of them was assembled.</p>
+    <p class="sub">Mushroom detection</p>
+    <div class="grid grid-2">
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-det-pdf.jpg" alt="Labelling tool screenshot with red bounding boxes marked by hand on brown mushrooms" loading="lazy"></div><figcaption><b>Labelling. </b>Hand-drawn bounding boxes, one class</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-det-green.jpg" alt="Dark image of many small round mushrooms with green bounding boxes labelled mushroom" loading="lazy"></div><figcaption><b>Detection. </b>Detector output on a dense field of small mushrooms, one green box per detection</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/mu-det3.jpg" alt="Detector output on a labelled image of white mushrooms on a black background, with overlapping red boxes" loading="lazy"></div><figcaption><b>Output. </b>Detector output on a labelled training image. Overlapping boxes are not yet filtered.</figcaption></figure>
+    </div>
+    <figure class="fig fig-wide"><div class="fig-mat"><img src="img/mu-curves.jpg" alt="Training curves for run 3: box and objectness loss falling, precision, recall and mAP rising over 100 epochs" loading="lazy"></div><figcaption><b>Training. </b>Run 3 over 100 epochs, YOLOv5m at 640</figcaption></figure>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Run</th><th>Model</th><th>Image size</th><th>Precision</th><th>Recall</th><th>mAP@0.5</th><th>mAP@0.5:0.95</th></tr><tr><td>1</td><td>YOLOv5n</td><td>640</td><td>0.233</td><td>0.281</td><td>0.160</td><td>0.048</td></tr><tr><td>2</td><td>YOLOv5m</td><td>720</td><td>0.568</td><td>0.521</td><td>0.506</td><td>0.254</td></tr><tr><td>3</td><td>YOLOv5m</td><td>640</td><td>0.564</td><td>0.510</td><td>0.513</td><td>0.229</td></tr></table></div>
+    <p class="small" style="margin-top:12px">Small proof-of-pipeline dataset: 11 labelled images from the internet, 8 for training (217 boxes) and 3 for validation (192 boxes), one class. Same split in all runs, 100 epochs, batch 16. Moving from the nano to the medium model raised mAP@0.5 from 0.16 to 0.51. These are preliminary figures from a few images, not a field result.</p>
+  </section>
+
+  <!-- ========================= A9 BIRD DRONE ========================= -->
+  <section class="sheet" id="a9">
+    <div class="sheet-head">
+      <span class="sheet-no">A9</span>
+      <h2>Bird-shaped drone, Version 2</h2>
+      <span class="chip chip-fill">Airfoil and CAD</span>
+    </div>
+    <p class="sheet-brief">A flapping-wing drone shaped like a bird, built around a defined NACA 7412 wing section and modelled part by part for 3D printing and ANSYS analysis.</p>
+    
+    <div class="kv"><div><strong class="num">NACA 7412</strong><span>wing airfoil, from its coordinates</span></div><div><strong class="num">7% at 40%</strong><span>maximum camber, chord position</span></div><div><strong class="num">12.1%</strong><span>maximum thickness at 29% of chord</span></div><div><strong class="num">9 parts</strong><span>printable at 40% scale</span></div><div><strong class="num">Version 2</strong><span>current design</span></div></div>
+    <div class="cols">
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-iso.jpg" alt="Isometric render of the bird-shaped drone with ribbed wings, a cream fuselage, a dark head and a fan-shaped tail" loading="lazy"></div><figcaption><b>Assembly. </b>Bird-shaped drone, Version 2</figcaption></figure>
+      <div class="note"><h3>Scope</h3><ul><li>Flapping-wing, bird-shaped drone, Version 2, modelled around a defined NACA 7412 wing section.</li><li>Wing section built from the airfoil coordinates, then modelled as a ribbed wing with a mesh-patterned skin.</li><li>Fuselage, head, legs and fan-shaped tail modelled as separate parts and assembled in SolidWorks.</li><li>Model split into 9 printable parts at 40% scale, with STL files for each.</li><li>Wing geometry exported as IGES for ANSYS.</li></ul><p class="small" style="margin-top:12px">Role: sole engineer. Airfoil selection, SolidWorks design, print preparation.</p></div>
+    </div>
+    <p class="sub">Assembly animation</p>
+    <figure class="fig"><video src="vid/bd-assembly.mp4" muted loop playsinline controls preload="metadata" aria-label="Assembly animation of the bird drone"></video><figcaption><b>Assembly. </b>Parts fly in and assemble: wings, fuselage, head, tail and legs</figcaption></figure>
+    <p class="sub">Airfoil</p>
+    <figure class="fig fig-wide"><div class="fig-mat"><img src="img/bd-foil.jpg" alt="Clean plot of the NACA 7412 profile with its camber line and the positions of maximum camber and maximum thickness" loading="lazy"></div><figcaption><b>Profile. </b>NACA 7412 drawn from the exported coordinates, equal axes</figcaption></figure>
+    <div class="tbl-wrap"><table class="tbl pw"><tr><th>Property</th><th>Value from the coordinates</th></tr><tr><td>Profile</td><td>NACA 7412</td></tr><tr><td>Maximum camber</td><td>7.0% at 40% of chord</td></tr><tr><td>Maximum thickness</td><td>12.1% at 29% of chord</td></tr><tr><td>Points per surface</td><td>100 (200 in total)</td></tr><tr><td>Reference chord of the scaled file</td><td>200 mm</td></tr><tr><td>Trailing edge</td><td>Open by 0.25% of chord</td></tr></table></div>
+    <p class="sub">Model</p>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-front.jpg" alt="Front view of the drone showing the wing dihedral, head and legs" loading="lazy"></div><figcaption><b>Front. </b>Front view: wing shape, head and legs</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-explode.jpg" alt="Exploded view of the drone showing wings, fuselage, head, tail and legs as separate parts" loading="lazy"></div><figcaption><b>Parts. </b>Exploded view: the part list</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-tail.jpg" alt="Render of the fan-shaped tail with its vertical fin" loading="lazy"></div><figcaption><b>Tail. </b>Tail with a vertical fin</figcaption></figure>
+    </div>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-wing1.jpg" alt="Render of a wing with curved ribs and root rods" loading="lazy"></div><figcaption><b>Wing. </b>Wing with curved ribs and root rods</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-wing2.jpg" alt="Second render of the wing from the other side" loading="lazy"></div><figcaption><b>Wing. </b>Wing, second view</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-wingtop.jpg" alt="Planform view of the wing with its sweep and segments" loading="lazy"></div><figcaption><b>Planform. </b>Wing planform</figcaption></figure>
+    </div>
+    <p class="sub">Visualisation</p>
+    <div class="grid grid-3">
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-fly1.jpg" alt="The drone model composited over a landscape with cloudy sky" loading="lazy"></div><figcaption><b>Scene. </b>Model over a landscape backdrop</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-fly2.jpg" alt="The drone model banking over a hillside" loading="lazy"></div><figcaption><b>Scene. </b>Banking pose</figcaption></figure>
+      <figure class="fig"><div class="fig-mat"><img src="img/bd-fly3.jpg" alt="The drone model high over a hillside" loading="lazy"></div><figcaption><b>Scene. </b>Distant pose</figcaption></figure>
+    </div>
+    <p class="small" style="margin-top:12px">The three scene images are visualisations of the CAD model on a backdrop. They are not flow or flight simulations.</p>
+  </section>
+
+  <!-- ========================= CONTACT ========================= -->
+  <section class="close" id="contact">
+    <div>
+      <h2>Send a sketch, a drawing or a brief</h2>
+      <p style="margin-top:16px; max-width:32em">You get back a scope, a timeline and a price. Typical work: a part or assembly modelled from a sketch, a drawing set for a design you already have, a lever or frame checked before it is built.</p>
+      <ul class="reach">
+        <li><a href="mailto:mohamadalrawashdeh9@gmail.com"><span>Email</span><span>mohamadalrawashdeh9@gmail.com</span></a></li>
+        <li><a href="https://wa.me/79057741598" rel="noopener"><span>WhatsApp</span><span>+7 905 774 15 98</span></a></li>
+        <li><a href="https://t.me/mohamedalirw" rel="noopener"><span>Telegram</span><span>@mohamedalirw</span></a></li>
+        <li><a href="https://www.linkedin.com/in/mohammad-rawashdeh-28a4a6285" rel="noopener"><span>LinkedIn</span><span>mohammad-rawashdeh</span></a></li>
+        <li><a href="https://github.com/Mo7amed3liRW" rel="noopener"><span>GitHub</span><span>Mo7amed3liRW</span></a></li>
+        <li><a href="https://mo7amed3lirw.github.io/registration/" rel="noopener"><span>Tutoring</span><span>Book sessions</span></a></li>
+      </ul>
+    </div>
+    <ul class="creds">
+      <li><span>SolidWorks CSWP</span><span>Dassault Systèmes</span></li>
+      <li><span>SolidWorks CSWA</span><span>Dassault Systèmes</span></li>
+      <li><span>B.Sc. Mechanical Engineering</span><span>JUST, Jordan</span></li>
+      <li><span>Trainee Design Engineer</span><span>JoVision, 2023 to 2024</span></li>
+      <li><span>Engineering tutor</span><span>200+ students</span></li>
+    </ul>
+  </section>
+</div>
+
+<div class="lb" id="lb" hidden>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lb'), im=document.getElementById('lb-img'), cap=document.getElementById('lb-cap');
+  document.querySelectorAll('.fig img').forEach(function(el){
+    el.addEventListener('click',function(){ im.src=el.currentSrc||el.src; im.alt=el.alt; cap.textContent=el.alt; lb.hidden=false; });
+  });
+  lb.addEventListener('click',function(){ lb.hidden=true; });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') lb.hidden=true; });
+})();
+</script>
+
+<script>
+(function(){
+  document.querySelectorAll('.tablist').forEach(function(list){
+    var tabs=[].slice.call(list.querySelectorAll('[role=tab]'));
+    var panels=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'))});
+    function show(i,focus){
+      tabs.forEach(function(t,k){var on=k===i; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1; panels[k].hidden=!on;});
+      if(focus) tabs[i].focus();
+      panels.forEach(function(p,k){ if(k!==i) p.querySelectorAll('video').forEach(function(x){try{x.pause()}catch(e){}}); });
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){show(i,false)});
+      t.addEventListener('keydown',function(e){
+        var n=null;
+        if(e.key==='ArrowRight') n=(i+1)%tabs.length;
+        else if(e.key==='ArrowLeft') n=(i-1+tabs.length)%tabs.length;
+        else if(e.key==='Home') n=0; else if(e.key==='End') n=tabs.length-1;
+        if(n!==null){e.preventDefault(); show(n,true);}
+      });
+    });
+    show(0,false);
+  });
+})();
+</script>
